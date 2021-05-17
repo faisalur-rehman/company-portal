@@ -70,7 +70,7 @@ const CompanyProfile = () => {
     //   console.log(err.response)
     // }
     // setClicked(true)
-    // setRedirect(true)
+    setRedirect(true)
   }
   return (
     <div className="container">
@@ -82,7 +82,6 @@ const CompanyProfile = () => {
           flexWrap: "wrap",
         }}
       >
-        {/* <Step1 active={0} style={{ width: "60%" }} /> */}
         <Col>
           <FormikComponent
             initialValues={initialValues}
@@ -123,7 +122,7 @@ const CompanyProfile = () => {
             <Button type="submit" className="mt-4" color="primary">
               Submit
             </Button>
-            {/* {redirect && <Redirect to="generalInformation" />} */}
+            {redirect && <Redirect to="jobDescription" />}
           </FormikComponent>
         </Col>
         {/* <Col sm={2}></Col> */}

@@ -23,6 +23,8 @@ import UploadAssets from "pages/Forms/UploadAssets"
 import CompanyProfile from "pages/Forms/CompanyProfile"
 import CompanyJobDescription from "pages/Forms/CompanyJobDescription"
 import ReactAdmin from "pages/AdminView/CompanyProfiles"
+import JobsFeed from "pages/Jobs/JobsFeed"
+import CompanyJob from "pages/Jobs/CompanyJob"
 
 const authProtectedRoutes = [
   { path: "/dashboard", component: Dashboard },
@@ -30,21 +32,23 @@ const authProtectedRoutes = [
   //profile
   { path: "/profile", component: UserProfile },
 
-  { path: "/form", component: TourGuideForm },
-  { path: "/introduction", component: Introduction },
-  { path: "/generalInformation", component: GeneralInformation },
-  { path: "/tourMilan", component: ToursMilan },
-  { path: "/meetPoint", component: MeetPoint },
-  { path: "/faq", component: FAQ },
-  { path: "/town", component: Town },
-  { path: "/uploadAssets", component: UploadAssets },
+  // { path: "/form", component: TourGuideForm },
+  // { path: "/introduction", component: Introduction },
+  // { path: "/generalInformation", component: GeneralInformation },
+  // { path: "/tourMilan", component: ToursMilan },
+  // { path: "/meetPoint", component: MeetPoint },
+  // { path: "/faq", component: FAQ },
+  // { path: "/town", component: Town },
+  // { path: "/uploadAssets", component: UploadAssets },
   { path: "/profile", component: UserProfile },
   { path: "/companyProfile", component: CompanyProfile },
   { path: "/jobDescription", component: CompanyJobDescription },
-  { path: "/adminn", component: ReactAdmin },
+  { path: "/adminView", component: ReactAdmin },
+  { path: "/jobsFeed", component: JobsFeed },
+  { path: "/companyJob", component: CompanyJob },
 
   // this route should be at the end of all other routes
-  { path: "/", exact: true, component: () => <Redirect to="/dashboard" /> },
+  { path: "/", exact: true, component: () => <Redirect to="/login" /> },
 ]
 
 const publicRoutes = [

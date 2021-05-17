@@ -18,7 +18,7 @@ const initialValues = {
 const CompanyJobDescription = () => {
   const [value, setValues] = useState()
   const [error, setError] = useState(null)
-  const [id, setId] = useState()
+  const [id, setId] = useState("")
   const [clicked, setClicked] = useState(false)
   const [redirect, setRedirect] = useState(false)
 
@@ -62,6 +62,7 @@ const CompanyJobDescription = () => {
   }
   async function handleSubmit(data) {
     console.log(data)
+    setClicked(true)
     // try {
     //   const resData = await formPostData(
     //     "/tour-guide/info",
@@ -78,6 +79,7 @@ const CompanyJobDescription = () => {
     // }
     // setClicked(true)
     // setRedirect(true)
+    // setId("Job Description Posted Successfully.")
   }
   return (
     <div className="container">
@@ -159,10 +161,18 @@ const CompanyJobDescription = () => {
               component="div"
               style={{ color: "red" }}
             />
-            <Button type="submit" className="mt-4" color="primary">
-              Submit
-            </Button>
-            {/* {redirect && <Redirect to="generalInformation" />} */}
+            <div>
+              <Button type="submit" className="mt-4" color="primary">
+                Submit
+              </Button>
+            </div>
+            <br />
+            {clicked && !error && (
+              <Button color="primary" onClick={() => setRedirect(true)}>
+                See job posting here
+              </Button>
+            )}
+            {redirect && <Redirect to="companyJob" />}
           </FormikComponent>
         </Col>
         {/* <Col sm={2}></Col> */}

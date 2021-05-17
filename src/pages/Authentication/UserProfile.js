@@ -28,7 +28,7 @@ import { editProfile, resetProfileFlag } from "../../store/actions"
 class UserProfile extends Component {
   constructor(props) {
     super(props)
-    this.state = { email: "", name: "", idx: 1 }
+    this.state = { email: "", name: "", idx: 1, contact: "", address: "" }
 
     // handleValidSubmit
     this.handleValidSubmit = this.handleValidSubmit.bind(this)
@@ -36,7 +36,8 @@ class UserProfile extends Component {
 
   // handleValidSubmit
   handleValidSubmit(event, values) {
-    this.props.editProfile(values)
+    // this.props.editProfile(values)
+    console.log(values)
   }
 
   componentDidMount() {
@@ -85,7 +86,7 @@ class UserProfile extends Component {
         <div className="page-content">
           <Container fluid>
             {/* Render Breadcrumb */}
-            <Breadcrumb title="Skote" breadcrumbItem="Profile" />
+            <Breadcrumb title="" breadcrumbItem="Profile" />
 
             <Row>
               <Col lg="12">
@@ -96,7 +97,7 @@ class UserProfile extends Component {
                   <Alert color="success">{this.props.success}</Alert>
                 ) : null}
 
-                <Card>
+                {/* <Card>
                   <CardBody>
                     <Media>
                       <div className="me-3">
@@ -115,11 +116,9 @@ class UserProfile extends Component {
                       </Media>
                     </Media>
                   </CardBody>
-                </Card>
+                </Card> */}
               </Col>
             </Row>
-
-            <h4 className="card-title mb-4">Change User Name</h4>
 
             <Card>
               <CardBody>
@@ -132,18 +131,48 @@ class UserProfile extends Component {
                   <div className="form-group">
                     <AvField
                       name="username"
-                      label="User Name"
+                      label="Name"
                       value={this.state.name}
                       className="form-control"
-                      placeholder="Enter User Name"
+                      placeholder="Enter Name"
                       type="text"
                       required
                     />
                     <AvField name="idx" value={this.state.idx} type="hidden" />
+                    <br />
+                    <AvField
+                      name="email"
+                      label="Email"
+                      value={this.state.email}
+                      className="form-control"
+                      placeholder="Enter Email"
+                      type="email"
+                      required
+                    />
+                    <br />
+                    <AvField
+                      name="address"
+                      label="Address"
+                      value={this.state.address}
+                      className="form-control"
+                      placeholder="Enter Address"
+                      type="text"
+                      required
+                    />
+                    <br />
+                    <AvField
+                      name="contact"
+                      label="Contact Number"
+                      value={this.state.contact}
+                      className="form-control"
+                      placeholder="Enter contact Number"
+                      type="number"
+                      required
+                    />
                   </div>
                   <div className="text-center mt-4">
                     <Button type="submit" color="danger">
-                      Edit User Name
+                      Edit Profile
                     </Button>
                   </div>
                 </AvForm>

@@ -1,24 +1,54 @@
 import React from "react"
 import "./AdminView.css"
-// import { Admin, Resource, ListGuesser } from "react-admin"
-// import jsonServerProvider from "ra-data-json-server"
-
-//connect the data provider to the REST endpoint
-// const dataProvider = jsonServerProvider("https://jsonplaceholder.typicode.com")
 
 function AdminView() {
+  let companyView = [
+    {
+      name: "company1",
+      email: "company@gmail.com",
+      status: "Pending",
+    },
+    {
+      name: "company2",
+      email: "company2@gmail.com",
+      status: "Approved",
+    },
+    {
+      name: "company3",
+      email: "company3@gmail.com",
+      status: "Declined",
+    },
+    {
+      name: "company4",
+      email: "company4@gmail.com",
+      status: "Pending",
+    },
+    {
+      name: "company5",
+      email: "company5@gmail.com",
+      status: "Approved",
+    },
+  ]
+
   return (
-    <div className="page-content profiles">
-      <div className="col sm-2"></div>
-      <div className="col-sm-2" style={{ border: "1px solid black" }}>
-        <div className="company">Div1</div>
-        <div className="company">Div2</div>
-        <div className="company">Div3</div>
-      </div>
-      <div className="col-sm-6" style={{ border: "1px solid black" }}>
-        this is great
-      </div>
-      <div className="col-sm-2"></div>
+    <div className="page-content companies">
+      <h3>Companies Listing:</h3>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Status</th>
+        </tr>
+        {companyView.map((company, index) => (
+          // <Link to="/">
+          <tr key={index}>
+            <td>{company.name}</td>
+            <td>{company.email}</td>
+            <td>{company.status}</td>
+          </tr>
+          // </Link>
+        ))}
+      </table>
     </div>
   )
 }

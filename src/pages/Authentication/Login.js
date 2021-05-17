@@ -7,20 +7,25 @@ import { Link, Redirect } from "react-router-dom"
 import { postData } from "../Api/ApiRequest"
 // import images
 import profile from "../../assets/images/profile-img.png"
-import logo from "../../assets/images/logo.svg"
-import lightlogo from "../../assets/images/logo-light.svg"
 
 const Login = () => {
   const [error, setError] = useState(null)
   const [clicked, setClicked] = useState(false)
+  const [loginType, setType] = useState("")
+  const [redirect, setRedirect] = useState(false)
+  if (localStorage.getItem("token")) {
+    localStorage.removeItem("token")
+  }
 
   const handleSubmit = async data => {
     try {
       const resData = await postData("/auth/login", data)
       setError(null)
       console.log(resData.data.user)
+      // localStorage.setItem("id", resData.data.user._id)
+      setType(resData.data.user.type)
+      setRedirect(true)
       localStorage.setItem("token", resData.data.user.token)
-      localStorage.setItem("id", resData.data.user._id)
     } catch (err) {
       setError(err.response.data.name)
       console.log(err.response)
@@ -72,24 +77,8 @@ const Login = () => {
                         </Row>
                       </div>
                       <CardBody className="pt-0">
-                        {/* <div>
-                          <Link to="/" className="auth-logo-light">
-                            <div className="avatar-md profile-user-wid mb-4">
-                              <span className="avatar-title rounded-circle bg-light">
-                                <img
-                                  src={logo}
-                                  alt=""
-                                  className="rounded-circle"
-                                  height="34"
-                                  width="90"
-                                />
-                              </span>
-                            </div>
-                          </Link>
-                        </div> */}
                         <div className="p-2">
                           <Form className="form-horizontal">
-                            <p style={{ color: "red" }}>{error}</p>
                             <div className="mb-3">
                               <Field
                                 name="email"
@@ -126,7 +115,13 @@ const Login = () => {
                                 Log In
                               </button>
                             </div>
-
+                            <p style={{ color: "red" }}>{error}</p>
+                            {redirect && loginType === "company" && (
+                              <Redirect to="/companyProfile" />
+                            )}
+                            {redirect && loginType === "admin" && (
+                              <Redirect to="/adminView" />
+                            )}
                             <div className="mt-4 text-center">
                               <Link to="/resetPassword" className="text-muted">
                                 <i className="mdi mdi-lock me-1" />

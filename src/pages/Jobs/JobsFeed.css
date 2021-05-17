@@ -1,0 +1,16 @@
+.job {
+  background: white;
+  min-height: 90vh;
+  padding: 20px;
+  width: 80%;
+  margin: auto;
+}
+.job h2,
+.job h3,
+.job h5,
+.job p {
+  margin: 25px 10px;
+}
+.job p {
+  font-size: 1rem;
+}

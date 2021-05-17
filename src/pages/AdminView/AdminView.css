@@ -6,5 +6,30 @@
   padding: 10px;
   background-color: white;
   margin: 5px;
-  border: 1px solid rgb(179, 177, 177);
+  border: 1px solid rgb(134, 134, 134);
+}
+.companies {
+  width: 80%;
+  margin: auto;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+tr {
+  cursor: pointer;
+  margin: 15px;
+}
+
+td,
+th {
+  border: 1px solid #c5c5c5;
+  text-align: left;
+  padding: 10px;
+  font-size: 16px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
 }

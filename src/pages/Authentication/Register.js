@@ -49,12 +49,12 @@ const Register = () => {
 
   const handleSubmit = async data => {
     try {
-      const resData = await postData("/auth/tour-guide-register", data)
+      const resData = await postData("/auth/company-register", data)
       setError(null)
-      setTimeout(() => setRedirect(true), 3000)
+      setTimeout(() => setRedirect(true), 1000)
       console.log(resData)
     } catch (err) {
-      // setError(err.response.data.name)
+      setError(err.response.data.message)
       console.log(err.response)
     }
     setClicked(true)
@@ -88,7 +88,22 @@ const Register = () => {
                   </Row>
                 </div>
                 <CardBody className="pt-0">
-                  <div className="p-2 mt-3">
+                  {/* <div>
+                    <Link to="/">
+                      <div className="avatar-md profile-user-wid mb-4">
+                        <span className="avatar-title rounded-circle bg-light">
+                          <img
+                            src={logo}
+                            alt=""
+                            className="rounded-circle"
+                            height="34"
+                            width="78"
+                          />
+                        </span>
+                      </div>
+                    </Link>
+                  </div> */}
+                  <div className="p-2">
                     <Formik
                       initialValues={{
                         email: "",
@@ -100,16 +115,7 @@ const Register = () => {
                     >
                       {() => (
                         <>
-                          <div
-                            className="error"
-                            style={{
-                              display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                            }}
-                          >
-                            {error && <p>{error}</p>}
-                          </div>
+                          <br />
                           <Form className="form-horizontal">
                             <div className="mb-3">
                               <Field
@@ -161,10 +167,22 @@ const Register = () => {
                               </Button>
                               {clicked && !error && (
                                 <>
-                                  <p>Registered Successfully</p>
+                                  <p style={{ color: "green" }}>
+                                    Registered Successfully
+                                  </p>
                                   {redirect && <Redirect to="/login" />}
                                 </>
                               )}
+                              <div
+                                className="error"
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  marginTop: 20,
+                                }}
+                              >
+                                {error && <p>{error}</p>}
+                              </div>
                             </div>
 
                             <div className="mt-4 text-center">
@@ -175,6 +193,7 @@ const Register = () => {
                                   className="text-primary"
                                   target="_blank"
                                 >
+                                  {" "}
                                   Terms of Use
                                 </a>
                               </p>
