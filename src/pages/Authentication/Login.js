@@ -16,6 +16,9 @@ const Login = () => {
   if (localStorage.getItem("token")) {
     localStorage.removeItem("token")
   }
+  if (localStorage.getItem("type")) {
+    localStorage.removeItem("type")
+  }
 
   const handleSubmit = async data => {
     try {
@@ -26,6 +29,7 @@ const Login = () => {
       setType(resData.data.user.type)
       setRedirect(true)
       localStorage.setItem("token", resData.data.user.token)
+      localStorage.setItem("type", resData.data.user.type)
     } catch (err) {
       setError(err.response.data.name)
       console.log(err.response)
@@ -78,6 +82,7 @@ const Login = () => {
                       </div>
                       <CardBody className="pt-0">
                         <div className="p-2">
+                          <br />
                           <Form className="form-horizontal">
                             <div className="mb-3">
                               <Field
@@ -120,7 +125,7 @@ const Login = () => {
                               <Redirect to="/companyProfile" />
                             )}
                             {redirect && loginType === "admin" && (
-                              <Redirect to="/adminView" />
+                              <Redirect to="/welcomeAdmin" />
                             )}
                             <div className="mt-4 text-center">
                               <Link to="/resetPassword" className="text-muted">

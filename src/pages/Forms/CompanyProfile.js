@@ -10,8 +10,8 @@ import Step1 from "pages/Trackbar/Step1"
 
 const initialValues = {
   address: "",
-
   contactNumber: "",
+  companyType: "",
 }
 
 const CompanyProfile = () => {
@@ -49,6 +49,9 @@ const CompanyProfile = () => {
     }
     if (!values.address) {
       errors.address = "Required"
+    }
+    if (!values.companyType) {
+      errors.companyType = "Required"
     }
 
     return errors
@@ -115,6 +118,21 @@ const CompanyProfile = () => {
             />
             <ErrorMessage
               name="contactNumber"
+              component="div"
+              style={{ color: "red" }}
+            />
+            <br />
+            <label className="mt-3" htmlFor="contactType">
+              Contact Type:
+            </label>
+            <Field
+              name="contactType"
+              id="contactType"
+              className="form-control"
+              placeholder="Enter Contact Type e.g Software, Hardware"
+            />
+            <ErrorMessage
+              name="contactType"
               component="div"
               style={{ color: "red" }}
             />

@@ -16,10 +16,14 @@ class SidebarContent extends Component {
   constructor(props) {
     super(props)
     this.refDiv = React.createRef()
+    this.state = {
+      type: "",
+    }
   }
 
   componentDidMount() {
     this.initMenu()
+    this.setState({ type: localStorage.getItem("type") })
   }
 
   // eslint-disable-next-line no-unused-vars
@@ -27,6 +31,12 @@ class SidebarContent extends Component {
     if (this.props.type !== prevProps.type) {
       this.initMenu()
     }
+    if (prevState.type !== this.state.type) {
+      this.setState({ type: localStorage.getItem("type") })
+    }
+  }
+  componentWillUnmount() {
+    this.setState({ type: "" })
   }
 
   initMenu() {
@@ -117,7 +127,7 @@ class SidebarContent extends Component {
                   </span>
                   <span>{this.props.t("Dashboards")}</span>
                 </Link>
-                <ul className="sub-menu" aria-expanded="false">
+                {/* <ul className="sub-menu" aria-expanded="false">
                   <li>
                     <Link to="/dashboard">{this.props.t("Default")}</Link>
                   </li>
@@ -130,21 +140,31 @@ class SidebarContent extends Component {
                   <li>
                     <Link to="/#">{this.props.t("Blog")}</Link>
                   </li>
-                </ul>
+                </ul> */}
               </li>
-
               <li className="menu-title">{this.props.t("Apps")}</li>
-
-              <li>
+              {this.state.type && this.state.type === "admin" && (
+                <>
+                  <li>
+                    <Link to="/adminView" className=" waves-effect">
+                      <i className="bx bx-calendar" />
+                      <span>{this.props.t("Companies")}</span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/recruitersAdminView" className=" waves-effect">
+                      <i className="bx bx-calendar" />
+                      <span>{this.props.t("Recruiters")}</span>
+                    </Link>
+                  </li>
+                </>
+              )}
+              {/* <li>
                 <Link to="/#" className=" waves-effect">
                   <i className="bx bx-calendar" />
                   <span>{this.props.t("Calendar")}</span>
                 </Link>
-              </li>
-
-            
-
-              
+              </li> */}
             </ul>
           </div>
         </SimpleBar>

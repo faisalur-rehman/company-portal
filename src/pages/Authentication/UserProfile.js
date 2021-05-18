@@ -1,5 +1,5 @@
 import PropTypes from "prop-types"
-import React, { Component } from "react"
+import React, { useState, useEffect } from "react"
 import {
   Alert,
   Button,
@@ -10,6 +10,7 @@ import {
   Media,
   Row,
 } from "reactstrap"
+import { formGetData, formPostData, patchData } from "../Api/ApiRequest"
 
 // availity-reactstrap-validation
 import { AvField, AvForm } from "availity-reactstrap-validation"
@@ -25,164 +26,105 @@ import avatar from "../../assets/images/users/avatar-1.jpg"
 // actions
 import { editProfile, resetProfileFlag } from "../../store/actions"
 
-class UserProfile extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { email: "", name: "", idx: 1, contact: "", address: "" }
+const UserProfile = props => {
+  const [name, setName] = useState("")
+  const [contactNo, setContact] = useState("")
+  const [address, setAddress] = useState("")
+  // this.state = { email: "", name: "", idx: 1, contact: "", address: "" }
 
-    // handleValidSubmit
-    this.handleValidSubmit = this.handleValidSubmit.bind(this)
-  }
-
-  // handleValidSubmit
-  handleValidSubmit(event, values) {
-    // this.props.editProfile(values)
-    console.log(values)
-  }
-
-  componentDidMount() {
-    if (localStorage.getItem("authUser")) {
-      const obj = JSON.parse(localStorage.getItem("authUser"))
-      if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
-        this.setState({
-          name: obj.displayName,
-          email: obj.email,
-          idx: obj.uid,
-        })
-      } else if (
-        process.env.REACT_APP_DEFAULTAUTH === "fake" ||
-        process.env.REACT_APP_DEFAULTAUTH === "jwt"
-      ) {
-        this.setState({ name: obj.username, email: obj.email, idx: obj.uid })
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const { data } = await formGetData(
+          `/company/me`,
+          localStorage.getItem("token")
+        )
+        if (data.profile) {
+          setContact(data.profile.contactNo)
+          setAddress(data.profile.address)
+        }
+        console.log(data)
+        setError(null)
+      } catch (err) {
+        // setError(err.response)
+        console.log(err.response)
       }
+    }
+    fetchData()
+  }, [])
+
+  async function handleValidSubmit(event, values) {
+    console.log(values)
+    try {
+      const resData = await patchData(
+        "/company/profile",
+        values,
+        localStorage.getItem("token")
+      )
+      // setError(null)
+      console.log(resData)
+    } catch (err) {
+      console.log(err)
     }
   }
 
-  // eslint-disable-next-line no-unused-vars
-  // componentDidUpdate(prevProps, prevState, ss) {
-  //   if (this.props !== prevProps) {
-  //     const obj = JSON.parse(localStorage.getItem("authUser"))
-  //     if (process.env.REACT_APP_DEFAULTAUTH === "firebase") {
-  //       this.setState({
-  //         name: obj.displayName,
-  //         email: obj.email,
-  //         idx: obj.uid,
-  //       })
-  //     } else if (
-  //       process.env.REACT_APP_DEFAULTAUTH === "fake" ||
-  //       process.env.REACT_APP_DEFAULTAUTH === "jwt"
-  //     ) {
-  //       this.setState({ name: obj.username, email: obj.email, idx: obj.uid })
-  //     }
-  //     setTimeout(() => {
-  //       this.props.resetProfileFlag();
-  //     }, 3000);
-  //   }
-  // }
+  return (
+    <React.Fragment>
+      <div className="page-content">
+        <Container fluid>
+          <Breadcrumb title="" breadcrumbItem="Profile" />
 
-  render() {
-    return (
-      <React.Fragment>
-        <div className="page-content">
-          <Container fluid>
-            {/* Render Breadcrumb */}
-            <Breadcrumb title="" breadcrumbItem="Profile" />
+          <Row>
+            <Col lg="12">
+              {props.error && props.error ? (
+                <Alert color="danger">{props.error}</Alert>
+              ) : null}
+              {props.success && props.success ? (
+                <Alert color="success">{props.success}</Alert>
+              ) : null}
+            </Col>
+          </Row>
 
-            <Row>
-              <Col lg="12">
-                {this.props.error && this.props.error ? (
-                  <Alert color="danger">{this.props.error}</Alert>
-                ) : null}
-                {this.props.success && this.props.success ? (
-                  <Alert color="success">{this.props.success}</Alert>
-                ) : null}
-
-                {/* <Card>
-                  <CardBody>
-                    <Media>
-                      <div className="me-3">
-                        <img
-                          src={avatar}
-                          alt=""
-                          className="avatar-md rounded-circle img-thumbnail"
-                        />
-                      </div>
-                      <Media body className="align-self-center">
-                        <div className="text-muted">
-                          <h5>{this.state.name}</h5>
-                          <p className="mb-1">{this.state.email}</p>
-                          <p className="mb-0">Id no: #{this.state.idx}</p>
-                        </div>
-                      </Media>
-                    </Media>
-                  </CardBody>
-                </Card> */}
-              </Col>
-            </Row>
-
-            <Card>
-              <CardBody>
-                <AvForm
-                  className="form-horizontal"
-                  onValidSubmit={(e, v) => {
-                    this.handleValidSubmit(e, v)
-                  }}
-                >
-                  <div className="form-group">
-                    <AvField
-                      name="username"
-                      label="Name"
-                      value={this.state.name}
-                      className="form-control"
-                      placeholder="Enter Name"
-                      type="text"
-                      required
-                    />
-                    <AvField name="idx" value={this.state.idx} type="hidden" />
-                    <br />
-                    <AvField
-                      name="email"
-                      label="Email"
-                      value={this.state.email}
-                      className="form-control"
-                      placeholder="Enter Email"
-                      type="email"
-                      required
-                    />
-                    <br />
-                    <AvField
-                      name="address"
-                      label="Address"
-                      value={this.state.address}
-                      className="form-control"
-                      placeholder="Enter Address"
-                      type="text"
-                      required
-                    />
-                    <br />
-                    <AvField
-                      name="contact"
-                      label="Contact Number"
-                      value={this.state.contact}
-                      className="form-control"
-                      placeholder="Enter contact Number"
-                      type="number"
-                      required
-                    />
-                  </div>
-                  <div className="text-center mt-4">
-                    <Button type="submit" color="danger">
-                      Edit Profile
-                    </Button>
-                  </div>
-                </AvForm>
-              </CardBody>
-            </Card>
-          </Container>
-        </div>
-      </React.Fragment>
-    )
-  }
+          <Card>
+            <CardBody>
+              <AvForm
+                className="form-horizontal"
+                onValidSubmit={(e, v) => handleValidSubmit(e, v)}
+              >
+                <div className="form-group">
+                  <br />
+                  <AvField
+                    name="address"
+                    label="Address"
+                    value={address}
+                    className="form-control"
+                    placeholder="Enter Address"
+                    type="text"
+                    required
+                  />
+                  <br />
+                  <AvField
+                    name="contactNo"
+                    label="Contact Number"
+                    value={contactNo}
+                    className="form-control"
+                    placeholder="Enter contact Number"
+                    type="number"
+                    required
+                  />
+                </div>
+                <div className="text-center mt-4">
+                  <Button type="submit" color="danger">
+                    Edit Profile
+                  </Button>
+                </div>
+              </AvForm>
+            </CardBody>
+          </Card>
+        </Container>
+      </div>
+    </React.Fragment>
+  )
 }
 
 UserProfile.propTypes = {

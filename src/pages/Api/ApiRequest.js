@@ -45,9 +45,9 @@ export async function formGetData(endpoint, token) {
     },
   })
 }
-export async function patchData(endpoint, id, data, token) {
+export async function patchData(endpoint, data, token) {
   return api.patch(
-    `${endpoint}/${id}`,
+    `${endpoint}`,
     { ...data },
     {
       headers: {
