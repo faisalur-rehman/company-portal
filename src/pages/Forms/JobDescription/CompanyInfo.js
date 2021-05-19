@@ -132,7 +132,7 @@ const CompanyInfo = () => {
                           <option value="searchengine">Search Engine</option>
                         </Field>
                         <ErrorMessage
-                          name="type"
+                          name="hereAboutUs"
                           component="div"
                           style={{ color: "red" }}
                         />
