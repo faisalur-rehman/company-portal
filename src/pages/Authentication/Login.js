@@ -30,6 +30,7 @@ const Login = () => {
       setRedirect(true)
       localStorage.setItem("token", resData.data.user.token)
       localStorage.setItem("type", resData.data.user.type)
+      localStorage.setItem("id", resData.data.user._id)
     } catch (err) {
       setError(err.response.data.name)
       console.log(err.response)

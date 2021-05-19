@@ -22,7 +22,7 @@ const initialValues = {
 const EmployerData = () => {
   const [value, setValues] = useState()
   const [error, setError] = useState(null)
-  const [id, setId] = useState("")
+  const [id, setId] = useState()
   const [clicked, setClicked] = useState(false)
   const [redirect, setRedirect] = useState(false)
 
@@ -49,27 +49,27 @@ const EmployerData = () => {
   function validate(values) {
     const errors = {}
 
-    if (!values.jobTitle) {
-      errors.jobTitle = "Required"
-    }
-    if (!values.noOfHires) {
-      errors.noOfHires = "Required"
-    }
-    if (!values.isRemoteJob) {
-      errors.isRemoteJob = "Required"
-    }
-    if (!values.jobPostingLanguage) {
-      errors.jobPostingLanguage = "Required"
-    }
-    if (values.hiringRole === "select") {
-      errors.hiringRole = "Required"
-    }
-    if (values.size === "select") {
-      errors.size = "Required"
-    }
-    if (!values.location) {
-      errors.location = "Required"
-    }
+    // if (!values.jobTitle) {
+    //   errors.jobTitle = "Required"
+    // }
+    // if (!values.noOfHires) {
+    //   errors.noOfHires = "Required"
+    // }
+    // if (!values.isRemoteJob) {
+    //   errors.isRemoteJob = "Required"
+    // }
+    // if (!values.jobPostingLanguage) {
+    //   errors.jobPostingLanguage = "Required"
+    // }
+    // if (values.hiringRole === "select") {
+    //   errors.hiringRole = "Required"
+    // }
+    // if (values.size === "select") {
+    //   errors.size = "Required"
+    // }
+    // if (!values.location) {
+    //   errors.location = "Required"
+    // }
 
     return errors
   }
@@ -93,16 +93,13 @@ const EmployerData = () => {
       )
       setError(null)
       console.log(resData)
-      // console.log(resData.data.tourGuide._id)
-      // setId(resData.data.tourGuide._id)
-      // localStorage.setItem("id", resData.data.tourGuide._id)
+      setId(resData.data.post._id)
     } catch (err) {
       // setError(err.response.data.name)
       console.log(err.response)
     }
     setClicked(true)
     setRedirect(true)
-    setId("Job Description Posted Successfully.")
   }
   return (
     <div className="container">
@@ -269,7 +266,14 @@ const EmployerData = () => {
                 </Button>
               </div>
             )} */}
-            {redirect && <Redirect to="companyJob" />}
+            {redirect && id && (
+              <Redirect
+                to={{
+                  pathname: "/companyInfo",
+                  state: { id },
+                }}
+              />
+            )}
           </FormikComponent>
         </Col>
         {/* <Col sm={2}></Col> */}

@@ -10,7 +10,15 @@
 .job h5,
 .job p {
   margin: 25px 10px;
+  margin-bottom: 5px;
 }
 .job p {
   font-size: 1rem;
 }
+.city {
+  margin-top: 15px !important;
+}
+/*
+.title {
+  margin-bottom: 5px !important;
+} */

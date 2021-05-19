@@ -6,72 +6,45 @@ import { Link, Redirect } from "react-router-dom"
 import FormikComponent from "pages/Forms/Formik"
 
 const initialValues = {
-  size: "select",
-  phoneNo: "",
-  hereAboutUs: "select",
+  companySize: "select",
+  phoneNumber: "",
+  hearAboutUs: "select",
 }
 
-const CompanyInfo = () => {
+const CompanyInfo = props => {
   const [value, setValues] = useState()
   const [error, setError] = useState(null)
-  const [id, setId] = useState("")
   const [clicked, setClicked] = useState(false)
   const [redirect, setRedirect] = useState(false)
-
-  //   useEffect(() => {
-  //     // async function fetchData() {
-  //     //   try {
-  //     //     const { data } = await formGetData(
-  //     //       `/tour-guide/${localStorage.getItem("id")}`,
-  //     //       localStorage.getItem("token")
-  //     //     )
-  //     //     if (data.tourGuide) {
-  //     //       initialValues.jobDescription = data.tourGuide.jobDescription
-  //     //       initialValues.jobTitle = data.tourGuide.jobTitle
-  //     //       setValues(initialValues)
-  //     //     }
-  //     //     console.log(data)
-  //     //     setError(null)
-  //     //   } catch (err) {
-  //     //     // setError(err.response)
-  //     //     console.log(err.response)
-  //     //   }
-  //     // }
-  //     // fetchData()
-  //   }, [])
+  console.log(props.location.state)
   function validate(values) {
     const errors = {}
-    if (values.size === "select") {
-      errors.size = "Required"
+    if (values.companySize === "select") {
+      errors.companySize = "Required"
     }
-    if (values.hereAboutUs === "select") {
-      errors.hereAboutUs = "Required"
+    if (values.hearAboutUs === "select") {
+      errors.hearAboutUs = "Required"
     }
-    if (!values.phoneNo) {
-      errors.phoneNo = "Required"
+    if (!values.phoneNumber) {
+      errors.phoneNumber = "Required"
     }
     return errors
   }
   async function handleSubmit(data) {
     console.log(data)
+    try {
+      const resData = await patchData(
+        `/company-post/second-form/${props.location.state.id}`,
+        data,
+        localStorage.getItem("token")
+      )
+      setError(null)
+      console.log(resData)
+    } catch (err) {
+      // setError(err.response.data.name)
+      console.log(err.response)
+    }
     setClicked(true)
-    // try {
-    //   const resData = await formPostData(
-    //     "/tour-guide/info",
-    //     data,
-    //     localStorage.getItem("token")
-    //   )
-    //   setError(null)
-    //   console.log(resData.data.tourGuide._id)
-    //   setId(resData.data.tourGuide._id)
-    //   localStorage.setItem("id", resData.data.tourGuide._id)
-    // } catch (err) {
-    //   // setError(err.response.data.name)
-    //   console.log(err.response)
-    // }
-    // setClicked(true)
-    // setRedirect(true)
-    // setId("Job Description Posted Successfully.")
   }
   return (
     <div className="account-pages my-5 pt-sm-5">
@@ -101,18 +74,19 @@ const CompanyInfo = () => {
                       <Form>
                         <br />
                         <label className="mt-3">Company Size</label>
-                        <Field as="select" name="size" className="w-100">
+                        <Field as="select" name="companySize" className="w-100">
                           <option defaultValue value="select" disabled>
                             Select
                           </option>
-                          <option value="hiringmanager">1-50</option>
-                          <option value="ceo">50-100</option>
-                          <option value="teamlead">100-200</option>
-                          <option value="recruiter">200-500</option>
-                          <option value="recruiter">500+</option>
+                          <option value="_1_49">1-49</option>
+                          <option value="_50_149">50-149</option>
+                          <option value="_250_499">250-499</option>
+                          <option value="_500_749">500-749</option>
+                          <option value="_750_999">750-999</option>
+                          <option value="_1000_plus">1000+</option>
                         </Field>
                         <ErrorMessage
-                          name="size"
+                          name="companySize"
                           component="div"
                           style={{ color: "red" }}
                         />
@@ -120,32 +94,35 @@ const CompanyInfo = () => {
                         <label className="mt-3">
                           Where did you here about us?
                         </label>
-                        <Field as="select" name="hereAboutUs" className="w-100">
+                        <Field as="select" name="hearAboutUs" className="w-100">
                           <option defaultValue value="select" disabled>
                             Select
                           </option>
-                          <option value="sociamedia">Social Media</option>
+                          <option value="mouth_word">Mouth Word</option>
                           <option value="tv">TV</option>
-                          <option value="online">Online</option>
+                          <option value="onlineVideo">Online Video</option>
                           <option value="podcast">Podcast</option>
                           <option value="newspaper">Newspaper</option>
-                          <option value="searchengine">Search Engine</option>
+                          <option value="search_engine">Search Engine</option>
+                          <option value="mail">Mail</option>
+                          <option value="radio">Radio</option>
+                          <option value="streamAudio">Stream Audio</option>
                         </Field>
                         <ErrorMessage
-                          name="hereAboutUs"
+                          name="hearAboutUs"
                           component="div"
                           style={{ color: "red" }}
                         />
                         <br />
                         <label className="mt-3">Phone Number:</label>
                         <Field
-                          name="phoneNo"
+                          name="phoneNumber"
                           type="number"
                           className="form-control"
                           placeholder="Enter Phone number"
                         />
                         <ErrorMessage
-                          name="phoneNo"
+                          name="phoneNumber"
                           component="div"
                           style={{ color: "red" }}
                         />
@@ -160,15 +137,15 @@ const CompanyInfo = () => {
                           </Button>
                         </div>
                         <br />
-                        {clicked && !error && (
+                        {/* {clicked && !error && (
                           <Button
                             color="primary"
                             onClick={() => setRedirect(true)}
                           >
                             See job posting here
                           </Button>
-                        )}
-                        {/* {redirect && <Redirect to="companyJob" />} */}
+                        )} */}
+                        {redirect && <Redirect to="jobDetails" />}
                       </Form>
                     )}
                   </Formik>
