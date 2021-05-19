@@ -9,13 +9,14 @@ import FormikComponent from "pages/Forms/Formik"
 // import Step1 from "pages/Trackbar/Step1"
 
 const initialValues = {
-  title: "",
-  language: "",
-  role: "select",
+  jobTitle: "",
+  jobPostingLanguage: "",
+  hiringRole: "select",
   size: "select",
   location: "",
-  isRemote: "",
-  hires: "",
+  isRemoteJob: "",
+  noOfHires: "",
+  country: "",
 }
 
 const EmployerData = () => {
@@ -33,9 +34,10 @@ const EmployerData = () => {
           localStorage.getItem("token")
         )
         console.log(data)
-        // if (data.profile) {
-        //   setValues(data.profile.name)
-        // }
+        if (data.profile) {
+          initialValues.country = data.profile.country
+          setValues(initialValues)
+        }
         setError(null)
       } catch (err) {
         // setError(err.response)
@@ -47,20 +49,20 @@ const EmployerData = () => {
   function validate(values) {
     const errors = {}
 
-    if (!values.title) {
-      errors.title = "Required"
+    if (!values.jobTitle) {
+      errors.jobTitle = "Required"
     }
-    if (!values.hires) {
-      errors.hires = "Required"
+    if (!values.noOfHires) {
+      errors.noOfHires = "Required"
     }
-    if (!values.isRemote) {
-      errors.isRemote = "Required"
+    if (!values.isRemoteJob) {
+      errors.isRemoteJob = "Required"
     }
-    if (!values.language) {
-      errors.language = "Required"
+    if (!values.jobPostingLanguage) {
+      errors.jobPostingLanguage = "Required"
     }
-    if (values.role === "select") {
-      errors.role = "Required"
+    if (values.hiringRole === "select") {
+      errors.hiringRole = "Required"
     }
     if (values.size === "select") {
       errors.size = "Required"
@@ -73,24 +75,34 @@ const EmployerData = () => {
   }
   async function handleSubmit(data) {
     console.log(data)
+    let isRemote = false
+    if (data.isRemoteJob === "yes") {
+      data.isRemoteJob = true
+    }
+    if (data.isRemoteJob === "temporarily") {
+      data.isRemoteJob = null
+    }
+    if (data.isRemoteJob === "no") {
+      data.isRemoteJob = false
+    }
+    try {
+      const resData = await formPostData(
+        "/company-post/first-form",
+        data,
+        localStorage.getItem("token")
+      )
+      setError(null)
+      console.log(resData)
+      // console.log(resData.data.tourGuide._id)
+      // setId(resData.data.tourGuide._id)
+      // localStorage.setItem("id", resData.data.tourGuide._id)
+    } catch (err) {
+      // setError(err.response.data.name)
+      console.log(err.response)
+    }
     setClicked(true)
-    // try {
-    //   const resData = await formPostData(
-    //     "/tour-guide/info",
-    //     data,
-    //     localStorage.getItem("token")
-    //   )
-    //   setError(null)
-    //   console.log(resData.data.tourGuide._id)
-    //   setId(resData.data.tourGuide._id)
-    //   localStorage.setItem("id", resData.data.tourGuide._id)
-    // } catch (err) {
-    //   // setError(err.response.data.name)
-    //   console.log(err.response)
-    // }
-    // setClicked(true)
-    // setRedirect(true)
-    // setId("Job Description Posted Successfully.")
+    setRedirect(true)
+    setId("Job Description Posted Successfully.")
   }
   return (
     <div className="container">
@@ -123,48 +135,54 @@ const EmployerData = () => {
               style={{ color: "red" }}
             />
             <br />
+            <label className="mt-3">Country</label>
+            <Field
+              name="country"
+              className="form-control"
+              placeholder="Enter country"
+              disabled
+            />
+
+            <br />
             <label className="mt-3" htmlFor="jobTitle">
               Job Title:
             </label>
             <Field
-              name="title"
+              name="jobTitle"
               id="jobTitle"
               className="form-control"
-              placeholder="Enter job title"
+              placeholder="Enter job Title"
             />
             <ErrorMessage
-              name="title"
+              name="jobTitle"
               component="div"
               style={{ color: "red" }}
             />
             <br />
-            <label className="mt-3" htmlFor="language">
-              Enter language you want the post to appear in?
+            <label className="mt-3" htmlFor="jobPostingLanguage">
+              Enter Language you want the post to appear in?
             </label>
             <Field
-              name="language"
-              id="language"
+              name="jobPostingLanguage"
+              id="jobPostingLanguage"
               className="form-control"
-              placeholder="Enter language"
+              placeholder="Enter Language"
             />
             <ErrorMessage
-              name="language"
+              name="jobPostingLanguage"
               component="div"
               style={{ color: "red" }}
             />
             <br />
-            <label className="mt-3" htmlFor="role">
-              Your Role in the Hiring Process
-            </label>
-            <Field as="select" name="role" className="w-100">
-              <option selected value="select" disabled>
+            <label className="mt-3">Your Role in the Hiring Process</label>
+            <Field as="select" name="hiringRole" className="w-100">
+              <option defaultValue value="select" disabled>
                 Select
               </option>
-              <option value="hiringmanager">Hiring Manager</option>
-              <option value="ceo">CEO/Owner</option>
-              <option value="humanresource">Human Resource</option>
+              <option value="manager">Hiring Manager</option>
+              <option value="owner">CEO/Owner</option>
+              <option value="hr">Human Resource</option>
               <option value="assistant">Assistant Manager</option>
-              <option value="teamlead">Team Lead</option>
               <option value="recruiter">Recruiter or Talent Acquisition</option>
               <option value="other">Other</option>
             </Field>
@@ -176,7 +194,7 @@ const EmployerData = () => {
             <br />
             <label className="mt-3">Company Size</label>
             <Field as="select" name="size" className="w-100">
-              <option selected value="select" disabled>
+              <option defaultValue value="select" disabled>
                 Select
               </option>
               <option value="hiringmanager">1-50</option>
@@ -211,7 +229,7 @@ const EmployerData = () => {
               <label>
                 <Field
                   type="radio"
-                  name="isRemote"
+                  name="isRemoteJob"
                   value="yes"
                   className="m-2"
                 />
@@ -222,7 +240,7 @@ const EmployerData = () => {
               <label>
                 <Field
                   type="radio"
-                  name="isRemote"
+                  name="isRemoteJob"
                   value="no"
                   className="m-2"
                 />
@@ -233,7 +251,7 @@ const EmployerData = () => {
               <label>
                 <Field
                   type="radio"
-                  name="isRemote"
+                  name="isRemoteJob"
                   value="temporarily"
                   className="m-2"
                 />
@@ -241,15 +259,15 @@ const EmployerData = () => {
               </label>
             </div>
             <br />
-            <label className="mt-3">How many Hires?</label>
+            <label className="mt-3">How many noOfHires?</label>
             <Field
               type="number"
-              name="hires"
+              name="noOfHires"
               className="form-control"
-              placeholder="Enter number of Hires"
+              placeholder="Enter number of noOfHires"
             />
             <ErrorMessage
-              name="hires"
+              name="noOfHires"
               component="div"
               style={{ color: "red" }}
             />

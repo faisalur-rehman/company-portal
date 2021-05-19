@@ -13,7 +13,9 @@ const AdminWelcome = () => {
   }, [])
   return (
     <div className="page-content">
-      <h1>Welcome to Admin Panel</h1>
+      {localStorage.getItem("type" === "admin") && (
+        <h1>Welcome to Admin Panel</h1>
+      )}
     </div>
   )
 }
