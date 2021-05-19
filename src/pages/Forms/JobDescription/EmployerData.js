@@ -192,22 +192,7 @@ const EmployerData = () => {
               style={{ color: "red" }}
             />
             <br />
-            <label className="mt-3">Company Size</label>
-            <Field as="select" name="size" className="w-100">
-              <option defaultValue value="select" disabled>
-                Select
-              </option>
-              <option value="hiringmanager">1-50</option>
-              <option value="ceo">50-100</option>
-              <option value="teamlead">100-200</option>
-              <option value="recruiter">200-500</option>
-              <option value="recruiter">500+</option>
-            </Field>
-            <ErrorMessage
-              name="size"
-              component="div"
-              style={{ color: "red" }}
-            />
+
             <br />
             <label className="mt-3" htmlFor="location">
               Location:
@@ -277,13 +262,13 @@ const EmployerData = () => {
               </Button>
             </div>
             <br />
-            {clicked && !error && (
+            {/* {clicked && !error && (
               <div>
                 <Button color="primary" onClick={() => setRedirect(true)}>
                   See job posting here
                 </Button>
               </div>
-            )}
+            )} */}
             {redirect && <Redirect to="companyJob" />}
           </FormikComponent>
         </Col>
