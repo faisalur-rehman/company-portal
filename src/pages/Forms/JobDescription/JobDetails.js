@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react"
 import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik"
 import { Row, Col, CardBody, Card, Container, Button } from "reactstrap"
-import { formGetData, formPostData, patchData } from "../Api/ApiRequest"
+import { formGetData, formPostData, patchData } from "../../Api/ApiRequest"
 import { Link, Redirect } from "react-router-dom"
 import FormikComponent from "pages/Forms/Formik"
 
-import profile from "../../assets/images/profile-img.png"
-import Step1 from "pages/Trackbar/Step1"
+// import profile from "../../../assets/images/profile-img.png"
+// import Step1 from "pages/Trackbar/Step1"
 
 const initialValues = {
   jobDescription: "",
@@ -15,7 +15,7 @@ const initialValues = {
   pricePerHour: "",
 }
 
-const CompanyJobDescription = () => {
+const JobDetails = () => {
   const [value, setValues] = useState()
   const [error, setError] = useState(null)
   const [id, setId] = useState("")
@@ -97,24 +97,134 @@ const CompanyJobDescription = () => {
             initialValues={initialValues}
             validate={validate}
             handleSubmit={handleSubmit}
-            title="Job Description"
+            title="Job Details"
           >
             <label className="mt-3" htmlFor="jobDescription">
-              Job Description:
+              What type of Employment is it?
             </label>
-            <Field
-              as="textarea"
-              rows={6}
-              name="jobDescription"
-              id="jobDescription"
-              className="form-control"
-              placeholder="Enter job description"
-            />
+            <br />
+            <Field as="select" name="type" className="w-100">
+              <option value="fulltime">Full Time</option>
+              <option value="parttime">Part Time</option>
+              <option value="contractual">Contractual</option>
+            </Field>
             <ErrorMessage
-              name="jobDescription"
+              name="type"
               component="div"
               style={{ color: "red" }}
             />
+            <div role="group" aria-labelledby="checkbox-group">
+              <label className="mt-3">What contract type is it?</label>
+              <br />
+              <label>
+                <Field
+                  type="checkbox"
+                  name="checked"
+                  value="One"
+                  className="m-2"
+                />
+                One
+              </label>
+              <br />
+              <label>
+                <Field
+                  type="checkbox"
+                  name="checked"
+                  value="Two"
+                  className="m-2"
+                />
+                Two
+              </label>
+              <br />
+              <label>
+                <Field
+                  type="checkbox"
+                  name="checked"
+                  value="Three"
+                  className="m-2"
+                />
+                Three
+              </label>
+              <br />
+            </div>
+            <label className="mt-3">
+              Is there a planned date when to start?
+            </label>
+            <div>
+              <label>
+                <Field type="radio" name="date" value="yes" className="m-2" />
+                Yes
+              </label>
+            </div>
+            <div>
+              <label>
+                <Field type="radio" name="date" value="no" className="m-2" />
+                No
+              </label>
+            </div>
+            <br />
+
+            <label className="mt-3">Monthly Salary:</label>
+            <Field
+              name="salary"
+              type="number"
+              className="form-control"
+              placeholder="Enter Salary"
+            />
+            <ErrorMessage
+              name="salary"
+              component="div"
+              style={{ color: "red" }}
+            />
+            <br />
+            <label className="mt-3">Is there an application deadline?</label>
+            <div>
+              <label>
+                <Field
+                  type="radio"
+                  name="deadline"
+                  value="yes"
+                  className="m-2"
+                />
+                Yes
+              </label>
+            </div>
+            <div>
+              <label>
+                <Field
+                  type="radio"
+                  name="deadline"
+                  value="no"
+                  className="m-2"
+                />
+                No
+              </label>
+            </div>
+            <br />
+            <label className="mt-3">
+              Do you want applicants to submit resume?
+            </label>
+            <div>
+              <label>
+                <Field type="radio" name="resume" value="yes" className="m-2" />
+                Yes
+              </label>
+            </div>
+            <div>
+              <label>
+                <Field type="radio" name="resume" value="no" className="m-2" />
+                No
+              </label>
+            </div>
+            <label>
+              <Field
+                type="radio"
+                name="resume"
+                value="optional"
+                className="m-2"
+              />
+              Optional
+            </label>
             <br />
             <label className="mt-3" htmlFor="jobDescription">
               Job Description:
@@ -132,51 +242,7 @@ const CompanyJobDescription = () => {
               component="div"
               style={{ color: "red" }}
             />
-            <label className="mt-3" htmlFor="jobTitle">
-              Job Title:
-            </label>
-            <Field
-              name="jobTitle"
-              id="jobTitle"
-              className="form-control"
-              placeholder="Enter job title"
-            />
-            <ErrorMessage
-              name="jobTitle"
-              component="div"
-              style={{ color: "red" }}
-            />
-            <br />
 
-            <label className="mt-3" htmlFor="hoursToWork">
-              Hours To Work:
-            </label>
-            <Field
-              name="hoursToWork"
-              id="hoursToWork"
-              className="form-control"
-              placeholder="Enter Total Hours to work/ Company Timings"
-            />
-            <ErrorMessage
-              name="hoursToWork"
-              component="div"
-              style={{ color: "red" }}
-            />
-            <br />
-            <label className="mt-3" htmlFor="pricePerHour">
-              Price Per Hour:
-            </label>
-            <Field
-              name="pricePerHour"
-              id="pricePerHour"
-              className="form-control"
-              placeholder="Enter Salary Per Hour"
-            />
-            <ErrorMessage
-              name="pricePerHour"
-              component="div"
-              style={{ color: "red" }}
-            />
             <div>
               <Button type="submit" className="mt-4" color="primary">
                 Submit
@@ -198,4 +264,4 @@ const CompanyJobDescription = () => {
   )
 }
 
-export default CompanyJobDescription
+export default JobDetails

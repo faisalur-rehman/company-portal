@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react"
 import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik"
 import { Row, Col, CardBody, Card, Container, Button } from "reactstrap"
-import { formGetData, formPostData, patchData } from "../Api/ApiRequest"
+import { formGetData, formPostData, patchData } from "../../Api/ApiRequest"
 import { Link, Redirect } from "react-router-dom"
 import FormikComponent from "pages/Forms/Formik"
 
-import profile from "../../assets/images/profile-img.png"
-import Step1 from "pages/Trackbar/Step1"
+// import profile from "../../../assets/images/profile-img.png"
+// import Step1 from "pages/Trackbar/Step1"
 
 const initialValues = {
   jobDescription: "",
@@ -15,7 +15,7 @@ const initialValues = {
   pricePerHour: "",
 }
 
-const CompanyJobDescription = () => {
+const EmployerData = () => {
   const [value, setValues] = useState()
   const [error, setError] = useState(null)
   const [id, setId] = useState("")
@@ -97,18 +97,16 @@ const CompanyJobDescription = () => {
             initialValues={initialValues}
             validate={validate}
             handleSubmit={handleSubmit}
-            title="Job Description"
+            title="Employer's Description"
           >
             <label className="mt-3" htmlFor="jobDescription">
-              Job Description:
+              Company Name for this Job
             </label>
             <Field
-              as="textarea"
-              rows={6}
               name="jobDescription"
               id="jobDescription"
               className="form-control"
-              placeholder="Enter job description"
+              placeholder="Enter company name"
             />
             <ErrorMessage
               name="jobDescription"
@@ -116,22 +114,6 @@ const CompanyJobDescription = () => {
               style={{ color: "red" }}
             />
             <br />
-            <label className="mt-3" htmlFor="jobDescription">
-              Job Description:
-            </label>
-            <Field
-              as="textarea"
-              rows={6}
-              name="jobDescription"
-              id="jobDescription"
-              className="form-control"
-              placeholder="Enter job description"
-            />
-            <ErrorMessage
-              name="jobDescription"
-              component="div"
-              style={{ color: "red" }}
-            />
             <label className="mt-3" htmlFor="jobTitle">
               Job Title:
             </label>
@@ -149,13 +131,13 @@ const CompanyJobDescription = () => {
             <br />
 
             <label className="mt-3" htmlFor="hoursToWork">
-              Hours To Work:
+              Your Role in the Hiring Process
             </label>
             <Field
               name="hoursToWork"
               id="hoursToWork"
               className="form-control"
-              placeholder="Enter Total Hours to work/ Company Timings"
+              placeholder="Enter your role"
             />
             <ErrorMessage
               name="hoursToWork"
@@ -164,13 +146,52 @@ const CompanyJobDescription = () => {
             />
             <br />
             <label className="mt-3" htmlFor="pricePerHour">
-              Price Per Hour:
+              Location:
             </label>
             <Field
               name="pricePerHour"
               id="pricePerHour"
               className="form-control"
-              placeholder="Enter Salary Per Hour"
+              placeholder="Enter Location"
+            />
+            <ErrorMessage
+              name="pricePerHour"
+              component="div"
+              style={{ color: "red" }}
+            />
+            <br />
+            <label className="mt-3">Can this job be performed remotely?</label>
+            <div>
+              <label>
+                <Field type="radio" name="picked" value="yes" className="m-2" />
+                Yes
+              </label>
+            </div>
+            <div>
+              <label>
+                <Field type="radio" name="picked" value="no" className="m-2" />
+                No
+              </label>
+            </div>
+            <div>
+              <label>
+                <Field
+                  type="radio"
+                  name="picked"
+                  value="temporarily"
+                  className="m-2"
+                />
+                Temporarily due to covid
+              </label>
+            </div>
+            <br />
+            <label className="mt-3">How many Hires?</label>
+            <Field
+              type="number"
+              name="pricePerHour"
+              id="pricePerHour"
+              className="form-control"
+              placeholder="Enter number of Hires"
             />
             <ErrorMessage
               name="pricePerHour"
@@ -198,4 +219,4 @@ const CompanyJobDescription = () => {
   )
 }
 
-export default CompanyJobDescription
+export default EmployerData

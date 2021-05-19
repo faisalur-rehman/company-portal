@@ -27,6 +27,8 @@ import JobsFeed from "pages/Jobs/JobsFeed"
 import CompanyJob from "pages/Jobs/CompanyJob"
 import RecruitersAdminView from "pages/AdminView/RecruiterProfiles"
 import AdminWelcome from "pages/AdminView/AdminWelcome"
+import EmployerData from "pages/Forms/JobDescription/EmployerData"
+import JobDetails from "pages/Forms/JobDescription/JobDetails"
 
 const authProtectedRoutes = [
   { path: "/dashboard", component: Dashboard },
@@ -50,6 +52,8 @@ const authProtectedRoutes = [
   { path: "/companyJob", component: CompanyJob },
   { path: "/recruitersAdminView", component: RecruitersAdminView },
   { path: "/welcomeAdmin", component: AdminWelcome },
+  { path: "/employerData", component: EmployerData },
+  { path: "/jobDetails", component: JobDetails },
 
   // this route should be at the end of all other routes
   { path: "/", exact: true, component: () => <Redirect to="/login" /> },
