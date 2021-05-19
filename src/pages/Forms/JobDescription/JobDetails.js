@@ -104,6 +104,9 @@ const JobDetails = () => {
             </label>
             <br />
             <Field as="select" name="type" className="w-100">
+              <option value="select" disabled>
+                Select
+              </option>
               <option value="fulltime">Full Time</option>
               <option value="parttime">Part Time</option>
               <option value="contractual">Contractual</option>
@@ -162,8 +165,6 @@ const JobDetails = () => {
                 No
               </label>
             </div>
-            {/* <br /> */}
-
             <label className="mt-3">Monthly Salary:</label>
             <Field
               name="salary"
