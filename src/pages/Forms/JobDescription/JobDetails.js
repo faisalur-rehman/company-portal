@@ -162,7 +162,7 @@ const JobDetails = () => {
                 No
               </label>
             </div>
-            <br />
+            {/* <br /> */}
 
             <label className="mt-3">Monthly Salary:</label>
             <Field

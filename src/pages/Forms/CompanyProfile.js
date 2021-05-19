@@ -10,8 +10,8 @@ import Step1 from "pages/Trackbar/Step1"
 
 const initialValues = {
   address: "",
-  contactNumber: "",
-  companyType: "",
+  contactNo: "",
+  country: "",
 }
 
 const CompanyProfile = () => {
@@ -22,57 +22,54 @@ const CompanyProfile = () => {
   const [redirect, setRedirect] = useState(false)
 
   useEffect(() => {
-    // async function fetchData() {
-    //   try {
-    //     const { data } = await formGetData(
-    //       `/tour-guide/${localStorage.getItem("id")}`,
-    //       localStorage.getItem("token")
-    //     )
-    //     if (data.tourGuide) {
-    //       initialValues.jobDescription = data.tourGuide.jobDescription
-    //       initialValues.jobTitle = data.tourGuide.jobTitle
-    //       setValues(initialValues)
-    //     }
-    //     console.log(data)
-    //     setError(null)
-    //   } catch (err) {
-    //     // setError(err.response)
-    //     console.log(err.response)
-    //   }
-    // }
-    // fetchData()
+    async function fetchData() {
+      try {
+        const { data } = await formGetData(
+          `/company/me`,
+          localStorage.getItem("token")
+        )
+        if (data.profile) {
+          initialValues.address = data.profile.address
+          initialValues.contactNo = data.profile.contactNo
+          initialValues.country = data.profile.country
+          setValues(initialValues)
+        }
+        console.log(data)
+        setError(null)
+      } catch (err) {
+        // setError(err.response)
+        console.log(err)
+      }
+    }
+    fetchData()
   }, [])
   function validate(values) {
     const errors = {}
-    if (!values.contactNumber) {
-      errors.contactNumber = "Required"
+    if (!values.contactNo) {
+      errors.contactNo = "Required"
     }
     if (!values.address) {
       errors.address = "Required"
     }
-    if (!values.companyType) {
-      errors.companyType = "Required"
+    if (!values.country) {
+      errors.country = "Required"
     }
 
     return errors
   }
   async function handleSubmit(data) {
     console.log(data)
-    // try {
-    //   const resData = await formPostData(
-    //     "/tour-guide/info",
-    //     data,
-    //     localStorage.getItem("token")
-    //   )
-    //   setError(null)
-    //   console.log(resData.data.tourGuide._id)
-    //   setId(resData.data.tourGuide._id)
-    //   localStorage.setItem("id", resData.data.tourGuide._id)
-    // } catch (err) {
-    //   // setError(err.response.data.name)
-    //   console.log(err.response)
-    // }
-    // setClicked(true)
+    try {
+      const resData = await patchData(
+        "/company/profile",
+        data,
+        localStorage.getItem("token")
+      )
+      // setError(null)
+      console.log(resData)
+    } catch (err) {
+      console.log(err.response)
+    }
     setRedirect(true)
   }
   return (
@@ -111,28 +108,28 @@ const CompanyProfile = () => {
               Contact Number:
             </label>
             <Field
-              name="contactNumber"
+              name="contactNo"
               id="contactNumber"
               className="form-control"
               placeholder="Enter Contact Details"
             />
             <ErrorMessage
-              name="contactNumber"
+              name="contactNo"
               component="div"
               style={{ color: "red" }}
             />
             <br />
             <label className="mt-3" htmlFor="contactType">
-              Contact Type:
+              Country:
             </label>
             <Field
-              name="contactType"
+              name="country"
               id="contactType"
               className="form-control"
-              placeholder="Enter Contact Type e.g Software, Hardware"
+              placeholder="Enter Country"
             />
             <ErrorMessage
-              name="contactType"
+              name="country"
               component="div"
               style={{ color: "red" }}
             />

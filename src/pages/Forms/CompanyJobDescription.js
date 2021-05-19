@@ -116,22 +116,6 @@ const CompanyJobDescription = () => {
               style={{ color: "red" }}
             />
             <br />
-            <label className="mt-3" htmlFor="jobDescription">
-              Job Description:
-            </label>
-            <Field
-              as="textarea"
-              rows={6}
-              name="jobDescription"
-              id="jobDescription"
-              className="form-control"
-              placeholder="Enter job description"
-            />
-            <ErrorMessage
-              name="jobDescription"
-              component="div"
-              style={{ color: "red" }}
-            />
             <label className="mt-3" htmlFor="jobTitle">
               Job Title:
             </label>
