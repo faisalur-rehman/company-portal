@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types"
 import {
   Dropdown,
   DropdownToggle,
@@ -66,29 +66,30 @@ class ProfileMenu extends Component {
             <span className="d-none d-xl-inline-block ms-1">
               {this.state.name}
             </span>
-            <i className="mdi mdi-chevron-down d-none d-xl-inline-block"/>
+            <i className="mdi mdi-chevron-down d-none d-xl-inline-block" />
           </DropdownToggle>
           <DropdownMenu right>
-            <DropdownItem tag="a" href="/profile">
-              <i className="bx bx-user font-size-16 align-middle ms-1"/>
+            <Link to="/profile" className="dropdown-item">
+              <i className="bx bx-user font-size-16 align-middle ms-1" />
               {this.props.t("Profile")}
-            </DropdownItem>
+            </Link>
             <DropdownItem tag="a" href="/crypto-wallet">
-              <i className="bx bx-wallet font-size-16 align-middle me-1"/>
+              <i className="bx bx-wallet font-size-16 align-middle me-1" />
               {this.props.t("My Wallet")}
             </DropdownItem>
             <DropdownItem tag="a" href="#">
               <span className="badge badge-success float-end mt-1">5</span>
-              <i className="bx bx-wrench font-size-17 align-middle me-1"/>
+              <i className="bx bx-wrench font-size-17 align-middle me-1" />
               {this.props.t("Settings")}
             </DropdownItem>
             <DropdownItem tag="a" href="auth-lock-screen">
-              <i className="bx bx-lock-open font-size-16 align-middle me-1"/>
+              <i className="bx bx-lock-open font-size-16 align-middle me-1" />
               {this.props.t("Lock screen")}
             </DropdownItem>
-            <div className="dropdown-divider"/>
+            <div className="dropdown-divider" />
+
             <Link to="/logout" className="dropdown-item">
-              <i className="bx bx-power-off font-size-16 align-middle me-1 text-danger"/>
+              <i className="bx bx-power-off font-size-16 align-middle me-1 text-danger" />
               <span>{this.props.t("Logout")}</span>
             </Link>
           </DropdownMenu>
@@ -99,7 +100,7 @@ class ProfileMenu extends Component {
 }
 
 ProfileMenu.propTypes = {
-  t: PropTypes.any
+  t: PropTypes.any,
 }
 
 export default withRouter(withTranslation()(ProfileMenu))
