@@ -31,6 +31,7 @@ import EmployerData from "pages/Forms/JobDescription/EmployerData"
 import JobDetails from "pages/Forms/JobDescription/JobDetails"
 import CompanyInfo from "pages/Forms/JobDescription/CompanyInfo"
 import PostJob from "pages/Forms/JobDescription/PostJob"
+import CompanyDetail from "pages/AdminView/CompanyDetail"
 
 const authProtectedRoutes = [
   { path: "/dashboard", component: Dashboard },
@@ -58,6 +59,7 @@ const authProtectedRoutes = [
   { path: "/jobDetails", component: JobDetails },
   { path: "/companyInfo", component: CompanyInfo },
   { path: "/postJob", component: PostJob },
+  { path: "/companyDetail", component: CompanyDetail },
 
   // this route should be at the end of all other routes
   { path: "/", exact: true, component: () => <Redirect to="/login" /> },

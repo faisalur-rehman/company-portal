@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react"
 import "./AdminView.css"
 import { formGetData, formPostData, patchData } from "../Api/ApiRequest"
+import { Redirect } from "react-router"
 
 function AdminView() {
   const [companyView, setCompanies] = useState([])
+  const [id, setId] = useState()
+  const [redirect, setRedirect] = useState(false)
   useEffect(() => {
     console.log("new")
     async function fetchData() {
@@ -28,6 +31,10 @@ function AdminView() {
     }
     fetchData()
   }, [])
+  function handleRedirect(index) {
+    setId(companyView[index]._id)
+    setRedirect(true)
+  }
   // let companyView = [
   //   {
   //     name: "company1",
@@ -68,7 +75,7 @@ function AdminView() {
           </tr>
           {companyView.map((company, index) => (
             // <Link to="/">
-            <tr key={index} onClick={() => console.log(index)}>
+            <tr key={index} onClick={() => handleRedirect(index)}>
               <td>{company.contactNo}</td>
               <td>{company.address}</td>
               {company.isApproved ? <td>Approved</td> : <td>Not Approved</td>}
@@ -77,6 +84,14 @@ function AdminView() {
           ))}
         </tbody>
       </table>
+      {redirect && (
+        <Redirect
+          to={{
+            pathname: "/companyDetail",
+            state: { id },
+          }}
+        />
+      )}
     </div>
   )
 }
