@@ -34,12 +34,12 @@ const UserProfile = props => {
   // this.state = { email: "", name: "", idx: 1, contact: "", address: "" }
 
   useEffect(() => {
-    if (!localStorage.getItem("firstLoad")) {
-      localStorage.setItem("firstLoad", true)
-      window.location.reload()
-    } else {
-      localStorage.removeItem("firstLoad")
-    }
+    // if (!localStorage.getItem("firstLoad")) {
+    //   localStorage.setItem("firstLoad", true)
+    //   window.location.reload()
+    // } else {
+    //   localStorage.removeItem("firstLoad")
+    // }
     async function fetchData() {
       try {
         const { data } = await formGetData(

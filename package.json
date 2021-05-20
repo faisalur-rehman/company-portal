@@ -1,7 +1,7 @@
 {
   "name": "skotereact",
-  "homepage": "https://company-portal.netlify.app/",
   "version": "2.0.0",
+  "homepage": "https://company-portal.netlify.app/",
   "private": true,
   "dependencies": {
     "@fullcalendar/bootstrap": "^5.5.0",

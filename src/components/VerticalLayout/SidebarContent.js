@@ -20,7 +20,6 @@ class SidebarContent extends Component {
       type: "",
     }
   }
-
   componentDidMount() {
     this.initMenu()
     this.setState({ type: localStorage.getItem("type") })
@@ -113,6 +112,7 @@ class SidebarContent extends Component {
   }
 
   render() {
+    console.log("type", localStorage.getItem("type"))
     return (
       <React.Fragment>
         <SimpleBar style={{ maxHeight: "100%" }} ref={this.refDiv}>
@@ -127,23 +127,9 @@ class SidebarContent extends Component {
                   </span>
                   <span>{this.props.t("Dashboards")}</span>
                 </Link>
-                {/* <ul className="sub-menu" aria-expanded="false">
-                  <li>
-                    <Link to="/dashboard">{this.props.t("Default")}</Link>
-                  </li>
-                  <li>
-                    <Link to="/#">{this.props.t("Saas")}</Link>
-                  </li>
-                  <li>
-                    <Link to="/#">{this.props.t("Crypto")}</Link>
-                  </li>
-                  <li>
-                    <Link to="/#">{this.props.t("Blog")}</Link>
-                  </li>
-                </ul> */}
               </li>
               <li className="menu-title">{this.props.t("Apps")}</li>
-              {this.state.type && this.state.type === "admin" && (
+              {/* {localStorage.getItem("type") === "admin" && (
                 <>
                   <li>
                     <Link to="/adminView" className=" waves-effect">
@@ -151,15 +137,9 @@ class SidebarContent extends Component {
                       <span>{this.props.t("Companies")}</span>
                     </Link>
                   </li>
-                  {/* <li>
-                    <Link to="/recruitersAdminView" className=" waves-effect">
-                      <i className="bx bx-calendar" />
-                      <span>{this.props.t("Recruiters")}</span>
-                    </Link>
-                  </li> */}
                 </>
-              )}
-              {this.state.type && this.state.type === "company" && (
+              )} */}
+              {/* {this.state.type && this.state.type === "company" && (
                 <>
                   <li>
                     <Link to="/profile" className=" waves-effect">
@@ -173,14 +153,14 @@ class SidebarContent extends Component {
                       <span>{this.props.t("Post Job")}</span>
                     </Link>
                   </li>
-                  {/* <li>
+                   <li>
                     <Link to="/recruitersAdminView" className=" waves-effect">
                       <i className="bx bx-calendar" />
                       <span>{this.props.t("Recruiters")}</span>
                     </Link>
-                  </li> */}
+                  </li> 
                 </>
-              )}
+              )} */}
               {/* <li>
                 <Link to="/#" className=" waves-effect">
                   <i className="bx bx-calendar" />
