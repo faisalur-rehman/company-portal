@@ -37,7 +37,7 @@ const authProtectedRoutes = [
   { path: "/dashboard", component: Dashboard },
 
   //profile
-  { path: "/profile", component: UserProfile },
+  // { path: "/profile", component: UserProfile },
 
   // { path: "/form", component: TourGuideForm },
   // { path: "/introduction", component: Introduction },
@@ -62,7 +62,8 @@ const authProtectedRoutes = [
   { path: "/companyDetail", component: CompanyDetail },
 
   // this route should be at the end of all other routes
-  { path: "/", exact: true, component: () => <Redirect to="/login" /> },
+
+  { path: "/", exact: true, component: () => <Redirect to="/profile" /> },
 ]
 
 const publicRoutes = [

@@ -116,7 +116,7 @@ const EmployerData = () => {
             handleSubmit={handleSubmit}
             title="Employer's Description"
           >
-            <label className="mt-3">Company Name for this Job</label>
+            {/* <label className="mt-3">Company Name for this Job</label>
             <Field
               name="name"
               className="form-control"
@@ -128,7 +128,7 @@ const EmployerData = () => {
               component="div"
               style={{ color: "red" }}
             />
-            <br />
+            <br /> */}
             <label className="mt-3">Country</label>
             <Field
               name="country"

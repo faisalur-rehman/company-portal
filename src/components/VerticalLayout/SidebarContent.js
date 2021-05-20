@@ -151,12 +151,34 @@ class SidebarContent extends Component {
                       <span>{this.props.t("Companies")}</span>
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link to="/recruitersAdminView" className=" waves-effect">
                       <i className="bx bx-calendar" />
                       <span>{this.props.t("Recruiters")}</span>
                     </Link>
+                  </li> */}
+                </>
+              )}
+              {this.state.type && this.state.type === "company" && (
+                <>
+                  <li>
+                    <Link to="/profile" className=" waves-effect">
+                      <i className="bx bx-calendar" />
+                      <span>{this.props.t("Edit Profile")}</span>
+                    </Link>
                   </li>
+                  <li>
+                    <Link to="/postJob" className=" waves-effect">
+                      <i className="bx bx-calendar" />
+                      <span>{this.props.t("Post Job")}</span>
+                    </Link>
+                  </li>
+                  {/* <li>
+                    <Link to="/recruitersAdminView" className=" waves-effect">
+                      <i className="bx bx-calendar" />
+                      <span>{this.props.t("Recruiters")}</span>
+                    </Link>
+                  </li> */}
                 </>
               )}
               {/* <li>

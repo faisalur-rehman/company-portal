@@ -34,6 +34,12 @@ const UserProfile = props => {
   // this.state = { email: "", name: "", idx: 1, contact: "", address: "" }
 
   useEffect(() => {
+    if (!localStorage.getItem("firstLoad")) {
+      localStorage.setItem("firstLoad", true)
+      window.location.reload()
+    } else {
+      localStorage.removeItem("firstLoad")
+    }
     async function fetchData() {
       try {
         const { data } = await formGetData(
@@ -65,6 +71,7 @@ const UserProfile = props => {
       )
       // setError(null)
       console.log(resData)
+      setRedirect(true)
     } catch (err) {
       console.log(err)
     }
@@ -129,9 +136,9 @@ const UserProfile = props => {
                   <Button
                     type="submit"
                     color="primary"
-                    onClick={() => setRedirect(true)}
+                    // onClick={() => setRedirect(true)}
                   >
-                    Edit Profile
+                    Submit
                   </Button>
                 </div>
                 {redirect && <Redirect to="postJob" />}
