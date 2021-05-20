@@ -9,21 +9,6 @@ export async function postData(endpoint, data) {
     ...data,
   })
 }
-// export async function formPostContent(endpoint, data, token) {
-//   return api.post(
-//     `${endpoint}`,
-//     {
-//       ...data,
-//     },
-//     {
-//       headers: {
-//         "x-auth-token": token,
-//         accept: "application/json",
-//         "Content-Type": `multipart/form-data`,
-//       },
-//     }
-//   )
-// }
 export async function formPostData(endpoint, data, token) {
   return api.post(
     `${endpoint}`,

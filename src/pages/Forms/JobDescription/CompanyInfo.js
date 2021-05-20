@@ -45,6 +45,7 @@ const CompanyInfo = props => {
       console.log(err.response)
     }
     setClicked(true)
+    setRedirect(true)
   }
   return (
     <div className="account-pages my-5 pt-sm-5">
@@ -57,7 +58,7 @@ const CompanyInfo = props => {
                 <Row>
                   <Col xs={7}>
                     <div className="text-primary p-4">
-                      <h5 className="text-primary">Job Details!</h5>
+                      <h5 className="text-primary">Company Info!</h5>
                     </div>
                   </Col>
                   <Col className="col-5 align-self-end"></Col>
@@ -145,7 +146,14 @@ const CompanyInfo = props => {
                             See job posting here
                           </Button>
                         )} */}
-                        {redirect && <Redirect to="jobDetails" />}
+                        {redirect && (
+                          <Redirect
+                            to={{
+                              pathname: "/jobDetails",
+                              state: { id: props.location.state.id },
+                            }}
+                          />
+                        )}
                       </Form>
                     )}
                   </Formik>

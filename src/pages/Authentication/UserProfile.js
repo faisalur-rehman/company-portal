@@ -17,7 +17,7 @@ import { AvField, AvForm } from "availity-reactstrap-validation"
 
 // Redux
 import { connect } from "react-redux"
-import { withRouter } from "react-router-dom"
+import { Redirect, withRouter } from "react-router-dom"
 
 //Import Breadcrumb
 import Breadcrumb from "../../components/Common/Breadcrumb"
@@ -27,9 +27,10 @@ import avatar from "../../assets/images/users/avatar-1.jpg"
 import { editProfile, resetProfileFlag } from "../../store/actions"
 
 const UserProfile = props => {
-  const [name, setName] = useState("")
+  const [redirect, setRedirect] = useState(false)
   const [contactNo, setContact] = useState("")
   const [address, setAddress] = useState("")
+  const [country, setCountry] = useState("")
   // this.state = { email: "", name: "", idx: 1, contact: "", address: "" }
 
   useEffect(() => {
@@ -42,6 +43,7 @@ const UserProfile = props => {
         if (data.profile) {
           setContact(data.profile.contactNo)
           setAddress(data.profile.address)
+          setCountry(data.profile.country)
         }
         console.log(data)
         setError(null)
@@ -112,12 +114,27 @@ const UserProfile = props => {
                     type="number"
                     required
                   />
+                  <br />
+                  <AvField
+                    name="country"
+                    label="Country"
+                    value={country}
+                    className="form-control"
+                    placeholder="Enter country"
+                    type="text"
+                    required
+                  />
                 </div>
                 <div className="text-center mt-4">
-                  <Button type="submit" color="danger">
+                  <Button
+                    type="submit"
+                    color="primary"
+                    onClick={() => setRedirect(true)}
+                  >
                     Edit Profile
                   </Button>
                 </div>
+                {redirect && <Redirect to="postJob" />}
               </AvForm>
             </CardBody>
           </Card>

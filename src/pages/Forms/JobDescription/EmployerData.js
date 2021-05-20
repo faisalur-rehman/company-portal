@@ -74,17 +74,14 @@ const EmployerData = () => {
     return errors
   }
   async function handleSubmit(data) {
-    console.log(data)
     let isRemote = false
     if (data.isRemoteJob === "yes") {
       data.isRemoteJob = true
     }
-    if (data.isRemoteJob === "temporarily") {
-      data.isRemoteJob = null
-    }
     if (data.isRemoteJob === "no") {
       data.isRemoteJob = false
     }
+    console.log(data)
     try {
       const resData = await formPostData(
         "/company-post/first-form",
@@ -229,19 +226,8 @@ const EmployerData = () => {
                 No
               </label>
             </div>
-            <div>
-              <label>
-                <Field
-                  type="radio"
-                  name="isRemoteJob"
-                  value="temporarily"
-                  className="m-2"
-                />
-                Temporarily due to covid
-              </label>
-            </div>
             <br />
-            <label className="mt-3">How many noOfHires?</label>
+            <label className="mt-3">How many Hires?</label>
             <Field
               type="number"
               name="noOfHires"

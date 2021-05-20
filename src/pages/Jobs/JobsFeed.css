@@ -18,7 +18,7 @@
 .city {
   margin-top: 15px !important;
 }
-/*
-.title {
-  margin-bottom: 5px !important;
-} */
+.app-statement {
+  display: flex;
+  justify-content: space-between;
+}

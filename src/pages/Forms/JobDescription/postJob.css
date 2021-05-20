@@ -1,0 +1,13 @@
+.postJob {
+  text-align: center;
+  background-color: white;
+  padding: 20px 40px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  width: 70%;
+  margin: 160px auto;
+}
+.postJob h1,
+.postJob h5 {
+  margin-bottom: 20px;
+}

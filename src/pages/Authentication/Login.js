@@ -123,7 +123,7 @@ const Login = () => {
                             </div>
                             <p style={{ color: "red" }}>{error}</p>
                             {redirect && loginType === "company" && (
-                              <Redirect to="/companyProfile" />
+                              <Redirect to="/profile" />
                             )}
                             {redirect && loginType === "admin" && (
                               <Redirect to="/welcomeAdmin" />

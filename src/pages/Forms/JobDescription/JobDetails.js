@@ -8,89 +8,159 @@ import FormikComponent from "pages/Forms/Formik"
 // import profile from "../../../assets/images/profile-img.png"
 // import Step1 from "pages/Trackbar/Step1"
 
-const initialValues = {
-  // jobDescription: "",
-  // jobTitle: "",
-  // hoursToWork: "",
-  // pricePerHour: "",
-  employmentType: "select",
+let initialValues = {
+  empType: "select",
   contractType: "",
-  date: "",
-  salary: "",
-  deadline: "",
+  contractDuration: "",
+  isPlannedStartDate: "",
   plannedDate: "",
+  salaryCompensation: "select",
+  salaryRangeFrom: 0,
+  salaryRangeTo: 0,
+  compensationType: "select",
+  receiveApplication: "select",
+  streetAddress: "",
+  canSubmitResume: "",
+  isApplicationDeadline: "",
   deadlineDate: "",
-  reveivingMethod: "select",
+  jobDescription: "",
+  startingAt: 0,
+  exact: 0,
+  upto: 0,
 }
 
-const JobDetails = () => {
+const JobDetails = props => {
   const [value, setValues] = useState()
   const [error, setError] = useState(null)
   const [id, setId] = useState("")
   const [clicked, setClicked] = useState(false)
   const [redirect, setRedirect] = useState(false)
-
+  console.log(props.location.state.id)
   useEffect(() => {
-    // async function fetchData() {
-    //   try {
-    //     const { data } = await formGetData(
-    //       `/tour-guide/${localStorage.getItem("id")}`,
-    //       localStorage.getItem("token")
-    //     )
-    //     if (data.tourGuide) {
-    //       initialValues.jobDescription = data.tourGuide.jobDescription
-    //       initialValues.jobTitle = data.tourGuide.jobTitle
-    //       setValues(initialValues)
-    //     }
-    //     console.log(data)
-    //     setError(null)
-    //   } catch (err) {
-    //     // setError(err.response)
-    //     console.log(err.response)
-    //   }
-    // }
-    // fetchData()
+    async function fetchData() {
+      try {
+        const { data } = await formGetData(
+          `/company-post/third-form/${props.location.state.id}`,
+          localStorage.getItem("token")
+        )
+        // console.log(data.post)
+        if (data.post) {
+          initialValues.jobDescription = data.post.jobDescription
+          // initialValues.jobTitle = data.tourGuide.jobTitle
+          initialValues = { ...data.post }
+          setValues({ ...data.post })
+          if (value) initialValues = { ...value }
+        }
+        setError(null)
+      } catch (err) {
+        // setError(err.response)
+        console.log(err)
+      }
+    }
+    fetchData()
   }, [])
+  console.log(value)
+
   function validate(values) {
     const errors = {}
-    // if (!values.salary) {
-    //   errors.salary = "Required"
-    // }
-    // if (!values.date) {
-    //   errors.date = "Required"
-    // }
-    // if (!values.contractType) {
-    //   errors.contractType = "Required"
-    // }
-    // if (!values.employmentType) {
-    //   errors.employmentType = "Required"
-    // }
-    // if (!values.deadline) {
-    //   errors.deadline = "Required"
-    // }
+
+    // isApplicationDeadline: "",
+    // deadlineDate: "",
+    // jobDescription: "",
+    if (values.empType === "select") {
+      errors.empType = "Required"
+    }
+    if (values.compensationType === "select") {
+      errors.compensationType = "Required"
+    }
+    if (values.receiveApplication === "select") {
+      errors.receiveApplication = "Required"
+    }
+
+    if (values.salaryCompensation === "select") {
+      errors.salaryCompensation = "Required"
+    }
+    if (
+      values.contractType === "internship" ||
+      values.contractType === "contract"
+    ) {
+      if (+values.contractDuration < 1) {
+        errors.contractDuration = "Duration should be atleast one month long."
+      }
+    }
+    if (!values.isPlannedStartDate) {
+      errors.isPlannedStartDate = "Required"
+    }
+    if (values.receiveApplication === "inPerson" && !values.streetAddress) {
+      errors.streetAddress = "Required"
+    }
+    if (!values.isApplicationDeadline) {
+      errors.isApplicationDeadline = "Required"
+    }
+    if (!values.canSubmitResume) {
+      errors.canSubmitResume = "Required"
+    }
+    if (values.isApplicationDeadline === "yes" && !values.deadlineDate) {
+      errors.deadlineDate = "Required"
+    }
+    if (values.isPlannedStartDate === "yes" && !values.plannedDate) {
+      errors.plannedDate = "Required"
+    }
+    if (!values.contractType) {
+      errors.contractType = "Required"
+    }
+    if (!values.empType) {
+      errors.empType = "Required"
+    }
+    if (!values.isApplicationDeadline) {
+      errors.isApplicationDeadline = "Required"
+    }
+    if (!values.jobDescription) {
+      errors.jobDescription = "Required"
+    }
 
     return errors
   }
   async function handleSubmit(data) {
     console.log(data)
+    if (data.isPlannedStartDate === "yes") {
+      data.isPlannedStartDate = true
+    } else {
+      data.isPlannedStartDate = false
+    }
+    if (data.isApplicationDeadline === "yes") {
+      data.isApplicationDeadline = true
+    } else {
+      data.isApplicationDeadline = false
+    }
+    if (
+      data.contractType !== "internship" &&
+      data.contractType !== "contract"
+    ) {
+      data.contractDuration = 0
+    }
+    if (data.isPlannedStartDate === "no") {
+      data.plannedDate = ""
+    }
+    if (data.isApplicationDeadline === "no") {
+      data.deadlineDate = ""
+    }
+    if (data.receiveApplication === "mail") {
+      data.streetAddress = ""
+    }
+    try {
+      const resData = await patchData(
+        `/company-post/third-form/${props.location.state.id}`,
+        data,
+        localStorage.getItem("token")
+      )
+      setError(null)
+      console.log(resData)
+    } catch (err) {
+      setError(err.response)
+      console.log(err.response)
+    }
     setClicked(true)
-    // try {
-    //   const resData = await formPostData(
-    //     "/tour-guide/info",
-    //     data,
-    //     localStorage.getItem("token")
-    //   )
-    //   setError(null)
-    //   console.log(resData.data.tourGuide._id)
-    //   setId(resData.data.tourGuide._id)
-    //   localStorage.setItem("id", resData.data.tourGuide._id)
-    // } catch (err) {
-    //   // setError(err.response.data.name)
-    //   console.log(err.response)
-    // }
-    // setClicked(true)
-    // setRedirect(true)
-    // setId("Job Description Posted Successfully.")
   }
   return (
     <div className="account-pages my-5 pt-sm-5">
@@ -118,24 +188,20 @@ const JobDetails = () => {
                   >
                     {({ values }) => (
                       <Form>
-                        <label className="mt-3" htmlFor="jobDescription">
+                        <label className="mt-3">
                           What type of Employment is it?
                         </label>
                         <br />
-                        <Field
-                          as="select"
-                          name="employmentType"
-                          className="w-100"
-                        >
+                        <Field as="select" name="empType" className="w-100">
                           <option defaultValue value="select" disabled>
                             Select
                           </option>
-                          <option value="fulltime">Full Time</option>
-                          <option value="parttime">Part Time</option>
-                          <option value="contractual">Contractual</option>
+                          <option value="fullTime">Full Time</option>
+                          <option value="partTime">Part Time</option>
+                          <option value="either">Either</option>
                         </Field>
                         <ErrorMessage
-                          name="type"
+                          name="empType"
                           component="div"
                           style={{ color: "red" }}
                         />
@@ -168,13 +234,57 @@ const JobDetails = () => {
                             <Field
                               type="radio"
                               name="contractType"
+                              value="newGrad"
+                              className="m-2"
+                            />
+                            New-Grad
+                          </label>
+                          <br />
+                          <label>
+                            <Field
+                              type="radio"
+                              name="contractType"
+                              value="temporary"
+                              className="m-2"
+                            />
+                            Temporary
+                          </label>
+                          <br />
+                          <label>
+                            <Field
+                              type="radio"
+                              name="contractType"
                               value="commission"
                               className="m-2"
                             />
                             Commission
                           </label>
                           <br />
+                          <ErrorMessage
+                            name="contractType"
+                            component="div"
+                            style={{ color: "red" }}
+                          />
                         </div>
+                        {(values.contractType === "internship" ||
+                          values.contractType === "contract") && (
+                          <>
+                            <label className="mt-3">
+                              How long is the contract? (in months)
+                            </label>
+                            <Field
+                              name="contractDuration"
+                              type="number"
+                              className="form-control"
+                              placeholder="Enter contract duration"
+                            />
+                            <ErrorMessage
+                              name="contractDuration"
+                              component="div"
+                              style={{ color: "red" }}
+                            />
+                          </>
+                        )}
                         <label className="mt-3">
                           Is there a planned date when to start?
                         </label>
@@ -182,7 +292,7 @@ const JobDetails = () => {
                           <label>
                             <Field
                               type="radio"
-                              name="date"
+                              name="isPlannedStartDate"
                               value="yes"
                               className="m-2"
                             />
@@ -193,41 +303,189 @@ const JobDetails = () => {
                           <label>
                             <Field
                               type="radio"
-                              name="date"
+                              name="isPlannedStartDate"
                               value="no"
                               className="m-2"
                             />
                             No
                           </label>
                         </div>
-                        {values.date === "yes" && (
-                          <Field
-                            type="date"
-                            name="plannedDate"
-                            className="w-100"
-                          />
-                        )}
-                        <label className="mt-3">Monthly Salary:</label>
-                        <Field
-                          name="salary"
-                          type="number"
-                          className="form-control"
-                          placeholder="Enter Salary"
-                        />
                         <ErrorMessage
-                          name="salary"
+                          name="isPlannedStartDate"
+                          component="div"
+                          style={{ color: "red" }}
+                        />
+                        {values.isPlannedStartDate === "yes" && (
+                          <>
+                            <Field
+                              type="date"
+                              name="plannedDate"
+                              className="w-100"
+                            />
+                            <ErrorMessage
+                              name="plannedDate"
+                              component="div"
+                              style={{ color: "red" }}
+                            />
+                          </>
+                        )}
+                        <label className="mt-3">Salary:</label>
+
+                        <Field
+                          as="select"
+                          name="salaryCompensation"
+                          className="w-100"
+                        >
+                          <option defaultValue value="select" disabled>
+                            Select
+                          </option>
+                          <option value="startingAt">Starting At</option>
+                          <option value="range">Range</option>
+                          <option value="upto">Up to</option>
+                          <option value="exact">Exact Rate</option>
+                        </Field>
+                        <br />
+                        {(values.salaryCompensation === "startingAt" && (
+                          <>
+                            <br />
+                            <Field
+                              name="salaryRangeFrom"
+                              className="w-40 "
+                              placeholder="Starting at.."
+                            />
+                            <Field
+                              as="select"
+                              name="compensationType"
+                              className="w-40"
+                              style={{ marginLeft: 30 }}
+                            >
+                              <option defaultValue value="select" disabled>
+                                Select
+                              </option>
+                              <option value="hour">per hour</option>
+                              <option value="day">per day</option>
+                              <option value="week">per week</option>
+                              <option value="month">per month</option>
+                              <option value="year">per year</option>
+                            </Field>
+                            <ErrorMessage
+                              name="compensationType"
+                              component="div"
+                              style={{ color: "red" }}
+                            />
+                          </>
+                        )) ||
+                          (values.salaryCompensation === "range" && (
+                            <>
+                              {" "}
+                              <br />
+                              <Field
+                                name="salaryRangeFrom"
+                                className="w-40 "
+                                placeholder="From"
+                              />{" "}
+                              to{" "}
+                              <Field
+                                name="salaryRangeTo"
+                                className="w-40 "
+                                placeholder="To"
+                              />
+                              <Field
+                                as="select"
+                                name="compensationType"
+                                className="w-40"
+                                style={{ marginLeft: 30 }}
+                              >
+                                <option defaultValue value="select" disabled>
+                                  Select
+                                </option>
+                                <option value="hour">per hour</option>
+                                <option value="day">per day</option>
+                                <option value="week">per week</option>
+                                <option value="month">per month</option>
+                                <option value="year">per year</option>
+                              </Field>
+                              <ErrorMessage
+                                name="compensationType"
+                                component="div"
+                                style={{ color: "red" }}
+                              />
+                            </>
+                          )) ||
+                          (values.salaryCompensation === "upto" && (
+                            <>
+                              <br />
+                              <Field
+                                name="salaryRangeFrom"
+                                className="w-40 "
+                                placeholder="Upto.."
+                              />
+                              <Field
+                                as="select"
+                                name="compensationType"
+                                className="w-40"
+                                style={{ marginLeft: 30 }}
+                              >
+                                <option defaultValue value="select" disabled>
+                                  Select
+                                </option>
+                                <option value="hour">per hour</option>
+                                <option value="day">per day</option>
+                                <option value="week">per week</option>
+                                <option value="month">per month</option>
+                                <option value="year">per year</option>
+                              </Field>
+                              <ErrorMessage
+                                name="compensationType"
+                                component="div"
+                                style={{ color: "red" }}
+                              />
+                            </>
+                          )) ||
+                          (values.salaryCompensation === "exact" && (
+                            <>
+                              <br />
+                              <Field
+                                name="salaryRangeFrom"
+                                className="w-40 "
+                                placeholder="Exact Rate.."
+                              />
+                              <Field
+                                as="select"
+                                name="compensationType"
+                                className="w-40"
+                                style={{ marginLeft: 30 }}
+                              >
+                                <option defaultValue value="select" disabled>
+                                  Select
+                                </option>
+                                <option value="hour">per hour</option>
+                                <option value="day">per day</option>
+                                <option value="week">per week</option>
+                                <option value="month">per month</option>
+                                <option value="year">per year</option>
+                              </Field>
+                              <ErrorMessage
+                                name="compensationType"
+                                component="div"
+                                style={{ color: "red" }}
+                              />
+                            </>
+                          ))}
+                        <ErrorMessage
+                          name="salaryCompensation"
                           component="div"
                           style={{ color: "red" }}
                         />
                         <br />
                         <label className="mt-3">
-                          Is there an application deadline?
+                          Is there an application Deadline?
                         </label>
                         <div>
                           <label>
                             <Field
                               type="radio"
-                              name="deadline"
+                              name="isApplicationDeadline"
                               value="yes"
                               className="m-2"
                             />
@@ -238,7 +496,7 @@ const JobDetails = () => {
                           <label>
                             <Field
                               type="radio"
-                              name="deadline"
+                              name="isApplicationDeadline"
                               value="no"
                               className="m-2"
                             />
@@ -246,14 +504,26 @@ const JobDetails = () => {
                           </label>
                         </div>
                         <div>
-                          {values.deadline === "yes" && (
-                            <Field
-                              type="date"
-                              name="deadlineDate"
-                              className="w-100"
-                            />
+                          {values.isApplicationDeadline === "yes" && (
+                            <>
+                              <Field
+                                type="date"
+                                name="deadlineDate"
+                                className="w-100"
+                              />
+                              <ErrorMessage
+                                name="deadlineDate"
+                                component="div"
+                                style={{ color: "red" }}
+                              />
+                            </>
                           )}
                         </div>
+                        <ErrorMessage
+                          name="isApplicationDeadline"
+                          component="div"
+                          style={{ color: "red" }}
+                        />
                         <br />
                         <label className="mt-3">
                           Do you want applicants to submit resume?
@@ -262,7 +532,7 @@ const JobDetails = () => {
                           <label>
                             <Field
                               type="radio"
-                              name="resume"
+                              name="canSubmitResume"
                               value="yes"
                               className="m-2"
                             />
@@ -273,43 +543,66 @@ const JobDetails = () => {
                           <label>
                             <Field
                               type="radio"
-                              name="resume"
+                              name="canSubmitResume"
                               value="no"
                               className="m-2"
                             />
                             No
                           </label>
                         </div>
-                        <label>
-                          <Field
-                            type="radio"
-                            name="resume"
-                            value="optional"
-                            className="m-2"
-                          />
-                          Optional
-                        </label>
+                        <div>
+                          <label>
+                            <Field
+                              type="radio"
+                              name="canSubmitResume"
+                              value="optional"
+                              className="m-2"
+                            />
+                            Optional
+                          </label>
+                        </div>
+
+                        <ErrorMessage
+                          name="canSubmitResume"
+                          component="div"
+                          style={{ color: "red" }}
+                        />
                         <br />
-                        <label className="mt-3" htmlFor="jobDescription">
+                        <label className="mt-3">
                           How do you want to reveive applications?
                         </label>
                         <br />
                         <Field
                           as="select"
-                          name="receivingMethod"
+                          name="receiveApplication"
                           className="w-100"
                         >
                           <option defaultValue value="select" disabled>
                             Select
                           </option>
                           <option value="email">Email</option>
-                          <option value="inperson">In-Person</option>
+                          <option value="inPerson">In-Person</option>
                         </Field>
+                        {values.receiveApplication === "inPerson" && (
+                          <>
+                            <Field
+                              placeholder="Enter street address"
+                              name="streetAddress"
+                              className="w-100 mt-3 form-control"
+                            />
+                            <ErrorMessage
+                              name="streetAddress"
+                              component="div"
+                              style={{ color: "red" }}
+                            />
+                          </>
+                        )}
                         <ErrorMessage
-                          name="type"
+                          name="receiveApplication"
                           component="div"
                           style={{ color: "red" }}
                         />
+                        <br />
                         <label className="mt-3" htmlFor="jobDescription">
                           Job Description:
                         </label>
@@ -345,7 +638,14 @@ const JobDetails = () => {
                             See job posting here
                           </Button>
                         )}
-                        {/* {redirect && <Redirect to="companyJob" />} */}
+                        {redirect && (
+                          <Redirect
+                            to={{
+                              pathname: "/companyJob",
+                              state: { id: props.location.state.id },
+                            }}
+                          />
+                        )}
                       </Form>
                     )}
                   </Formik>
