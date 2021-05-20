@@ -63,7 +63,7 @@ const authProtectedRoutes = [
 
   // this route should be at the end of all other routes
 
-  { path: "/", exact: true, component: () => <Redirect to="/profile" /> },
+  { path: "/", exact: true, component: () => <Redirect to="/login" /> },
 ]
 
 const publicRoutes = [
