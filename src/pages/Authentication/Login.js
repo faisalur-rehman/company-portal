@@ -89,7 +89,7 @@ const Login = () => {
                               <Field
                                 name="email"
                                 type="email"
-                                className="form-control"
+                                className="form-control select"
                                 placeholder="Enter email"
                               />
                               <ErrorMessage
@@ -103,7 +103,7 @@ const Login = () => {
                               <Field
                                 name="password"
                                 type="password"
-                                className="form-control"
+                                className="form-control select"
                                 placeholder="Enter Password"
                               />
                               <ErrorMessage

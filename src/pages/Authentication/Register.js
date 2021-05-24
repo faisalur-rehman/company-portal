@@ -120,7 +120,7 @@ const Register = () => {
                             <div className="mb-3">
                               <Field
                                 name="email"
-                                className="form-control"
+                                className="form-control select"
                                 placeholder="Enter email"
                               />
                               <ErrorMessage
@@ -134,7 +134,7 @@ const Register = () => {
                               <Field
                                 name="name"
                                 placeholder="Enter name"
-                                className="form-control"
+                                className="form-control select"
                               />
                               <ErrorMessage
                                 name="name"
@@ -147,7 +147,7 @@ const Register = () => {
                               <Field
                                 type="password"
                                 name="password"
-                                className="form-control"
+                                className="form-control select"
                                 placeholder="Enter Password"
                               />
                               <ErrorMessage
