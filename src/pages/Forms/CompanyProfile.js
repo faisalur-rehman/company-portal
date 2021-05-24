@@ -82,7 +82,7 @@ const CompanyProfile = () => {
           flexWrap: "wrap",
         }}
       >
-        <Col>
+        <Col sm={8}>
           <FormikComponent
             initialValues={initialValues}
             validate={validate}

@@ -94,7 +94,7 @@ const UserProfile = props => {
             </Col>
           </Row>
 
-          <Card>
+          <Card style={{ width: "60%", margin: "auto" }}>
             <CardBody>
               <AvForm
                 className="form-horizontal"
@@ -106,7 +106,7 @@ const UserProfile = props => {
                     name="address"
                     label="Address"
                     value={address}
-                    className="form-control"
+                    className="form-control select"
                     placeholder="Enter Address"
                     type="text"
                     required
@@ -116,7 +116,7 @@ const UserProfile = props => {
                     name="contactNo"
                     label="Contact Number"
                     value={contactNo}
-                    className="form-control"
+                    className="form-control select"
                     placeholder="Enter contact Number"
                     type="number"
                     required
@@ -126,13 +126,13 @@ const UserProfile = props => {
                     name="country"
                     label="Country"
                     value={country}
-                    className="form-control"
+                    className="form-control select"
                     placeholder="Enter country"
                     type="text"
                     required
                   />
                 </div>
-                <div className="text-center mt-4">
+                <div className="mt-4">
                   <Button
                     type="submit"
                     color="primary"
