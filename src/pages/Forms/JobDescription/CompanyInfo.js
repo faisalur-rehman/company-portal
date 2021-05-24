@@ -75,7 +75,11 @@ const CompanyInfo = props => {
                       <Form>
                         <br />
                         <label className="mt-3">Company Size</label>
-                        <Field as="select" name="companySize" className="w-100">
+                        <Field
+                          as="select"
+                          name="companySize"
+                          className="w-100 select"
+                        >
                           <option defaultValue value="select" disabled>
                             Select
                           </option>
@@ -95,7 +99,11 @@ const CompanyInfo = props => {
                         <label className="mt-3">
                           Where did you here about us?
                         </label>
-                        <Field as="select" name="hearAboutUs" className="w-100">
+                        <Field
+                          as="select"
+                          name="hearAboutUs"
+                          className="w-100 select"
+                        >
                           <option defaultValue value="select" disabled>
                             Select
                           </option>
@@ -119,7 +127,7 @@ const CompanyInfo = props => {
                         <Field
                           name="phoneNumber"
                           type="number"
-                          className="form-control"
+                          className="form-control select"
                           placeholder="Enter Phone number"
                         />
                         <ErrorMessage

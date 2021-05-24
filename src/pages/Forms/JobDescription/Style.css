@@ -1,0 +1,33 @@
+.select {
+  height: 36px;
+  /* border: aqua; */
+  /* border: 1px solid rgb(190, 190, 190); */
+  border-radius: 5px;
+}
+.select:focus,
+.textarea:focus {
+  /* border-bottom: 4px solid rgb(140, 0, 255) !important; */
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1) !important;
+  border: 1px solid rgba(81, 203, 238, 1) !important;
+}
+.date {
+  outline: none;
+  border: 1px solid rgb(190, 190, 190);
+}
+.active:active {
+  border: 1px solid rgb(190, 190, 190);
+}
+.heart,
+.filled-heart {
+  margin-left: 10px;
+  padding: 5px;
+  font-size: 1.5rem;
+  vertical-align: middle;
+  background-color: rgb(230, 230, 230);
+  border-radius: 5px;
+  cursor: pointer;
+}
+.filled-heart {
+  color: red;
+}

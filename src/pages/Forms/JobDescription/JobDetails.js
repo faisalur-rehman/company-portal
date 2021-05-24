@@ -192,7 +192,11 @@ const JobDetails = props => {
                           What type of Employment is it?
                         </label>
                         <br />
-                        <Field as="select" name="empType" className="w-100">
+                        <Field
+                          as="select"
+                          name="empType"
+                          className="w-100 active select"
+                        >
                           <option defaultValue value="select" disabled>
                             Select
                           </option>
@@ -275,7 +279,7 @@ const JobDetails = props => {
                             <Field
                               name="contractDuration"
                               type="number"
-                              className="form-control"
+                              className="form-control select"
                               placeholder="Enter contract duration"
                             />
                             <ErrorMessage
@@ -320,7 +324,7 @@ const JobDetails = props => {
                             <Field
                               type="date"
                               name="plannedDate"
-                              className="w-100"
+                              className="w-100 date select"
                             />
                             <ErrorMessage
                               name="plannedDate"
@@ -334,7 +338,7 @@ const JobDetails = props => {
                         <Field
                           as="select"
                           name="salaryCompensation"
-                          className="w-100"
+                          className="w-100 select"
                         >
                           <option defaultValue value="select" disabled>
                             Select
@@ -350,13 +354,13 @@ const JobDetails = props => {
                             <br />
                             <Field
                               name="salaryRangeFrom"
-                              className="w-40 "
+                              className="w-40 date select"
                               placeholder="Starting at.."
                             />
                             <Field
                               as="select"
                               name="compensationType"
-                              className="w-40"
+                              className="w-40 select"
                               style={{ marginLeft: 30 }}
                             >
                               <option defaultValue value="select" disabled>
@@ -381,19 +385,19 @@ const JobDetails = props => {
                               <br />
                               <Field
                                 name="salaryRangeFrom"
-                                className="w-40 "
+                                className="w-40 date select"
                                 placeholder="From"
                               />{" "}
                               to{" "}
                               <Field
                                 name="salaryRangeTo"
-                                className="w-40 "
+                                className="w-40 date select"
                                 placeholder="To"
                               />
                               <Field
                                 as="select"
                                 name="compensationType"
-                                className="w-40"
+                                className="w-40 select"
                                 style={{ marginLeft: 30 }}
                               >
                                 <option defaultValue value="select" disabled>
@@ -417,13 +421,13 @@ const JobDetails = props => {
                               <br />
                               <Field
                                 name="salaryRangeFrom"
-                                className="w-40 "
+                                className="w-40 date select"
                                 placeholder="Upto.."
                               />
                               <Field
                                 as="select"
                                 name="compensationType"
-                                className="w-40"
+                                className="w-40 select"
                                 style={{ marginLeft: 30 }}
                               >
                                 <option defaultValue value="select" disabled>
@@ -447,13 +451,13 @@ const JobDetails = props => {
                               <br />
                               <Field
                                 name="salaryRangeFrom"
-                                className="w-40 "
+                                className="w-40 date select"
                                 placeholder="Exact Rate.."
                               />
                               <Field
                                 as="select"
                                 name="compensationType"
-                                className="w-40"
+                                className="w-40 select"
                                 style={{ marginLeft: 30 }}
                               >
                                 <option defaultValue value="select" disabled>
@@ -509,7 +513,7 @@ const JobDetails = props => {
                               <Field
                                 type="date"
                                 name="deadlineDate"
-                                className="w-100"
+                                className="w-100 date select"
                               />
                               <ErrorMessage
                                 name="deadlineDate"
@@ -575,7 +579,7 @@ const JobDetails = props => {
                         <Field
                           as="select"
                           name="receiveApplication"
-                          className="w-100"
+                          className="w-100 select"
                         >
                           <option defaultValue value="select" disabled>
                             Select
@@ -588,7 +592,7 @@ const JobDetails = props => {
                             <Field
                               placeholder="Enter street address"
                               name="streetAddress"
-                              className="w-100 mt-3 form-control"
+                              className="w-100 mt-3 form-control select"
                             />
                             <ErrorMessage
                               name="streetAddress"
@@ -611,7 +615,7 @@ const JobDetails = props => {
                           rows={6}
                           name="jobDescription"
                           id="jobDescription"
-                          className="form-control"
+                          className="form-control textarea"
                           placeholder="Enter job description"
                         />
                         <ErrorMessage

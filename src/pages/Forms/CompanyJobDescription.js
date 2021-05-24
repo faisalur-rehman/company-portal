@@ -4,6 +4,7 @@ import { Row, Col, CardBody, Card, Container, Button } from "reactstrap"
 import { formGetData, formPostData, patchData } from "../Api/ApiRequest"
 import { Link, Redirect } from "react-router-dom"
 import FormikComponent from "pages/Forms/Formik"
+import "./JobDescription/Style.css"
 
 import profile from "../../assets/images/profile-img.png"
 import Step1 from "pages/Trackbar/Step1"

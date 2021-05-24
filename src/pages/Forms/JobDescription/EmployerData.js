@@ -4,6 +4,7 @@ import { Row, Col, CardBody, Card, Container, Button } from "reactstrap"
 import { formGetData, formPostData, patchData } from "../../Api/ApiRequest"
 import { Link, Redirect } from "react-router-dom"
 import FormikComponent from "pages/Forms/Formik"
+import "./Style.css"
 
 // import profile from "../../../assets/images/profile-img.png"
 // import Step1 from "pages/Trackbar/Step1"
@@ -132,7 +133,7 @@ const EmployerData = () => {
             <label className="mt-3">Country</label>
             <Field
               name="country"
-              className="form-control"
+              className="form-control select"
               placeholder="Enter country"
               disabled
             />
@@ -144,7 +145,7 @@ const EmployerData = () => {
             <Field
               name="jobTitle"
               id="jobTitle"
-              className="form-control"
+              className="form-control select"
               placeholder="Enter job Title"
             />
             <ErrorMessage
@@ -159,7 +160,7 @@ const EmployerData = () => {
             <Field
               name="jobPostingLanguage"
               id="jobPostingLanguage"
-              className="form-control"
+              className="form-control select"
               placeholder="Enter Language"
             />
             <ErrorMessage
@@ -169,7 +170,7 @@ const EmployerData = () => {
             />
             <br />
             <label className="mt-3">Your Role in the Hiring Process</label>
-            <Field as="select" name="hiringRole" className="w-100">
+            <Field as="select" name="hiringRole" className="w-100 select">
               <option defaultValue value="select" disabled>
                 Select
               </option>
@@ -185,7 +186,6 @@ const EmployerData = () => {
               component="div"
               style={{ color: "red" }}
             />
-            <br />
 
             <br />
             <label className="mt-3" htmlFor="location">
@@ -194,7 +194,7 @@ const EmployerData = () => {
             <Field
               name="location"
               id="location"
-              className="form-control"
+              className="form-control select"
               placeholder="Enter Location"
             />
             <ErrorMessage
@@ -210,7 +210,7 @@ const EmployerData = () => {
                   type="radio"
                   name="isRemoteJob"
                   value="yes"
-                  className="m-2"
+                  className="m-2 "
                 />
                 Yes
               </label>
@@ -221,7 +221,7 @@ const EmployerData = () => {
                   type="radio"
                   name="isRemoteJob"
                   value="no"
-                  className="m-2"
+                  className="m-2 "
                 />
                 No
               </label>
@@ -231,7 +231,7 @@ const EmployerData = () => {
             <Field
               type="number"
               name="noOfHires"
-              className="form-control"
+              className="form-control select"
               placeholder="Enter number of noOfHires"
             />
             <ErrorMessage

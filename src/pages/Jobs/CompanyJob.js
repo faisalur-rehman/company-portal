@@ -20,6 +20,7 @@ const CompanyJob = props => {
   // ]
   const [job, setJob] = useState({})
   const [first, setFirst] = useState()
+  const [clicked, setClicked] = useState(false)
   useEffect(() => {
     async function fetchData() {
       try {
@@ -65,6 +66,17 @@ const CompanyJob = props => {
                 <Button style={{ marginLeft: 8 }} color="primary">
                   Apply for this Job
                 </Button>
+                {!clicked ? (
+                  <i
+                    className="far fa-heart heart"
+                    onClick={() => setClicked(!clicked)}
+                  ></i>
+                ) : (
+                  <i
+                    class="fas fa-heart filled-heart"
+                    onClick={() => setClicked(!clicked)}
+                  ></i>
+                )}
                 <h5>Salary($): {job.salaryRangeFrom}</h5>
                 <p className="description">{job.jobDescription}</p>
 
