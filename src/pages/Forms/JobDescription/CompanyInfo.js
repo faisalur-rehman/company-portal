@@ -51,7 +51,7 @@ const CompanyInfo = props => {
     <div className="account-pages my-5 pt-sm-5">
       <Container>
         <Row className="justify-content-center">
-          <Col>
+          <Col sm={8}>
             {/* <Col  md={8} lg={6} xl={5}> */}
             <Card className="overflow-hidden">
               <div className="bg-primary bg-soft">

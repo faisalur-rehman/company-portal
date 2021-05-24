@@ -110,7 +110,7 @@ const EmployerData = () => {
         }}
       >
         {/* <Step1 active={0} style={{ width: "60%" }} /> */}
-        <Col>
+        <Col sm={8}>
           <FormikComponent
             initialValues={initialValues}
             validate={validate}
