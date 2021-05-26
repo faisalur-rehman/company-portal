@@ -32,6 +32,7 @@ import JobDetails from "pages/Forms/JobDescription/JobDetails"
 import CompanyInfo from "pages/Forms/JobDescription/CompanyInfo"
 import PostJob from "pages/Forms/JobDescription/PostJob"
 import CompanyDetail from "pages/AdminView/CompanyDetail"
+import LandingPage from "pages/LandingPage/LandingPage"
 
 const authProtectedRoutes = [
   { path: "/dashboard", component: Dashboard },
@@ -63,10 +64,11 @@ const authProtectedRoutes = [
 
   // this route should be at the end of all other routes
 
-  { path: "/", exact: true, component: () => <Redirect to="/login" /> },
+  { path: "/", exact: true, component: () => <Redirect to="/landingPage" /> },
 ]
 
 const publicRoutes = [
+  { path: "/landingPage", component: LandingPage },
   { path: "/logout", component: Logout },
   { path: "/login", component: Login },
   { path: "/forgot-password", component: ForgetPwd },

@@ -1,0 +1,239 @@
+* {
+  font-family: Poppins, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  font-size: 1rem;
+}
+.hero-section {
+  background-color: #fff;
+}
+.hero-container {
+  /* max-width: 1280px; */
+  margin: 0px 10px;
+}
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  bottom: auto;
+  margin-bottom: 4rem;
+  margin-top: 6rem;
+}
+.hero-inner-title {
+  font-size: 76px;
+  font-weight: 900;
+  text-align: center;
+  color: #2d2d2d;
+  width: 80%;
+  margin: auto;
+}
+.hero-inner-subtitle {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 2rem;
+}
+.text-focus {
+  color: #f94101;
+}
+.hero-inner-subtitle p {
+  margin-bottom: 0.7rem;
+}
+.hero-inner-button {
+  display: flex;
+  justify-content: center;
+}
+.hero-inner-button button {
+  background-color: #f94101;
+  border-radius: 8px;
+  padding: 13px 30px;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  min-width: 200px;
+  outline: none;
+  border: none;
+}
+.hero-inner-button button:hover {
+  background-color: #f8c600;
+}
+.hero-cards {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 4rem;
+}
+.hero-card {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  background-color: #fbde6c;
+  padding: 0.6rem;
+  border-radius: 12px;
+  margin-bottom: 4rem;
+  padding: 0.9rem;
+  text-align: center;
+}
+.hero-card-header i {
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  font-size: 3rem;
+  color: #f94101;
+}
+
+.hero-card-body h4 {
+  font-size: 1.3rem;
+  color: #f94101;
+  margin-top: 0.7rem;
+}
+.hero-card-body p {
+  font-size: 16px;
+}
+
+.features-section-main {
+  background-color: #fbde6c;
+  color: #2d2d2d;
+}
+.features-section-title {
+  font-size: 40px;
+  font-weight: 900;
+  text-align: center;
+  color: #2d2d2d;
+  width: 80%;
+  margin: auto;
+  padding-top: 3rem;
+  line-height: normal;
+}
+.lead {
+  font-size: 16px;
+  font-weight: normal;
+  margin-top: 2rem;
+}
+.features-section-row {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 4rem;
+}
+.feature-section-main {
+  margin-bottom: 2rem;
+}
+.features-section-card {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 0.6rem;
+  border-radius: 12px;
+}
+.features-section-card-icon {
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  font-size: 3rem;
+  color: #f94101;
+}
+.features-section-card-text h4 {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #f94101;
+}
+.features-section-card-text p {
+  padding: 0.4rem 1rem 3rem 1rem;
+  text-align: center;
+}
+.features-section-footer {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: auto;
+  padding-bottom: 4rem;
+}
+
+.features-section-footer-button {
+  background-color: #f94101;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 1rem;
+  padding: 10px 14px;
+  cursor: pointer;
+  flex: 1;
+}
+
+.features-section-footer-text {
+  margin-left: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+@media screen and (max-width: 768px) {
+  .hero-inner-title {
+    font-size: 40px;
+    width: 98%;
+    margin: auto;
+  }
+  .hero-inner-subtitle {
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .features-section-title {
+    font-size: 26px;
+    width: 98%;
+    margin: auto;
+  }
+  .hero-cards {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-card {
+    width: 60%;
+    margin: auto;
+    margin-bottom: 3rem;
+  }
+  .features-section-row {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+  .features-section-card {
+    width: 60%;
+    margin: auto;
+    margin-top: 1rem;
+  }
+}
+@media screen and (max-width: 480px) {
+  .hero-cards {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-card {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 3rem;
+  }
+  .features-section-row {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+  .features-section-card {
+    width: 90%;
+    margin: auto;
+    margin-top: 1rem;
+  }
+  .features-section-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .features-section-footer-button {
+    margin-bottom: 1rem;
+  }
+}
