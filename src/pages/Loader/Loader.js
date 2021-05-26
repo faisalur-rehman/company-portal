@@ -14,7 +14,7 @@ function Loader({ loading }) {
 
   return (
     <div className="sweet-loading">
-      <BeatLoader color={color} loading={loading} size={15} />
+      <BeatLoader color={color} loading={loading} size={10} />
     </div>
   )
 }
