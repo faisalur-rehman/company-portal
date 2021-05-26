@@ -56,7 +56,7 @@ const LandingPage = () => {
             </div>
             <div className="hero-card">
               <div className="hero-card-header">
-                <i className="far fa-money-check-edit"></i>
+                <i class="fal fa-money-check-edit"></i>
               </div>
 
               <div className="hero-card-body">
@@ -95,7 +95,7 @@ const LandingPage = () => {
               </div>
               <div className="features-section-card">
                 <div className="features-section-card-icon">
-                  <i className="far fa-award"></i>
+                  <i className="fal fa-award"></i>
                 </div>
                 <div className="features-section-card-text">
                   <h4>Find quality applicants</h4>
@@ -109,7 +109,7 @@ const LandingPage = () => {
             <div className="features-section-row">
               <div className="features-section-card">
                 <div className="features-section-card-icon">
-                  <i className="fas fa-badge-check"></i>
+                  <i className="fal fa-badge-check"></i>
                 </div>
                 <div className="features-section-card-text">
                   <h4>Get more visibility</h4>

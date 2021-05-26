@@ -118,55 +118,23 @@ class SidebarContent extends Component {
         <SimpleBar style={{ maxHeight: "100%" }} ref={this.refDiv}>
           <div id="sidebar-menu">
             <ul className="metismenu list-unstyled" id="side-menu">
-              <li className="menu-title">{this.props.t("Menu")}</li>
+              <li className="menu-title" style={{ color: "white" }}>
+                {this.props.t("Menu")}
+              </li>
               <li>
                 <Link to="/#" className="waves-effect">
                   <i className="bx bx-home-circle" />
                   <span className="badge rounded-pill bg-info float-end">
                     04
                   </span>
-                  <span>{this.props.t("Dashboards")}</span>
+                  <span style={{ color: "white" }}>
+                    {this.props.t("Dashboards")}
+                  </span>
                 </Link>
               </li>
-              <li className="menu-title">{this.props.t("Apps")}</li>
-              {/* {localStorage.getItem("type") === "admin" && (
-                <>
-                  <li>
-                    <Link to="/adminView" className=" waves-effect">
-                      <i className="bx bx-calendar" />
-                      <span>{this.props.t("Companies")}</span>
-                    </Link>
-                  </li>
-                </>
-              )} */}
-              {/* {this.state.type && this.state.type === "company" && (
-                <>
-                  <li>
-                    <Link to="/profile" className=" waves-effect">
-                      <i className="bx bx-calendar" />
-                      <span>{this.props.t("Edit Profile")}</span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/postJob" className=" waves-effect">
-                      <i className="bx bx-calendar" />
-                      <span>{this.props.t("Post Job")}</span>
-                    </Link>
-                  </li>
-                   <li>
-                    <Link to="/recruitersAdminView" className=" waves-effect">
-                      <i className="bx bx-calendar" />
-                      <span>{this.props.t("Recruiters")}</span>
-                    </Link>
-                  </li> 
-                </>
-              )} */}
-              {/* <li>
-                <Link to="/#" className=" waves-effect">
-                  <i className="bx bx-calendar" />
-                  <span>{this.props.t("Calendar")}</span>
-                </Link>
-              </li> */}
+              <li className="menu-title" style={{ color: "white" }}>
+                {this.props.t("Apps")}
+              </li>
             </ul>
           </div>
         </SimpleBar>

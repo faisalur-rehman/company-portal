@@ -91,7 +91,10 @@ class Header extends Component {
         <header id="page-topbar">
           <div className="navbar-header">
             <div className="d-flex">
-              <div className="navbar-brand-box">
+              <div
+                className="navbar-brand-box"
+                style={{ backgroundColor: "#f85b26" }}
+              >
                 <Link to="/" className="logo logo-dark">
                   <span className="logo-sm">
                     <img src={logo} alt="" height="22" />
@@ -187,7 +190,6 @@ class Header extends Component {
               {/* Full Screen */}
 
               <ProfileMenu />
-              
             </div>
           </div>
         </header>

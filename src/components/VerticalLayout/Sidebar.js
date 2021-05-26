@@ -17,7 +17,7 @@ class Sidebar extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="vertical-menu">
+        <div className="vertical-menu" style={{ backgroundColor: "#f85b26" }}>
           <div data-simplebar className="h-100">
             {this.props.type !== "condensed" ? (
               <SidebarContent />
