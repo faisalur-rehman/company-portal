@@ -1,6 +1,7 @@
 import PropTypes from "prop-types"
 import React, { useState } from "react"
 import { Row, Col, CardBody, Card, Container, Button } from "reactstrap"
+import Loader from "pages/Loader/Loader"
 
 // availity-reactstrap-validation
 import { Formik, Form, Field, ErrorMessage } from "formik"
@@ -23,6 +24,7 @@ import { postData } from "../Api/ApiRequest"
 const Register = () => {
   const [error, setError] = useState(null)
   const [clicked, setClicked] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [redirect, setRedirect] = useState(false)
 
   const validate = values => {
@@ -48,16 +50,22 @@ const Register = () => {
   }
 
   const handleSubmit = async data => {
+    setClicked(true)
+    let resData
+    if (!resData) {
+      setLoading(true)
+    }
     try {
-      const resData = await postData("/auth/company-register", data)
+      resData = await postData("/auth/company-register", data)
       setError(null)
-      setTimeout(() => setRedirect(true), 1000)
+      setLoading(false)
+      setTimeout(() => setRedirect(true), 0)
       console.log(resData)
     } catch (err) {
       setError(err.response.data.message)
       console.log(err.response)
+      setLoading(false)
     }
-    setClicked(true)
   }
 
   return (
@@ -88,21 +96,6 @@ const Register = () => {
                   </Row>
                 </div>
                 <CardBody className="pt-0">
-                  {/* <div>
-                    <Link to="/">
-                      <div className="avatar-md profile-user-wid mb-4">
-                        <span className="avatar-title rounded-circle bg-light">
-                          <img
-                            src={logo}
-                            alt=""
-                            className="rounded-circle"
-                            height="34"
-                            width="78"
-                          />
-                        </span>
-                      </div>
-                    </Link>
-                  </div> */}
                   <div className="p-2">
                     <Formik
                       initialValues={{
@@ -163,15 +156,10 @@ const Register = () => {
                                 type="submit"
                                 color="primary"
                               >
-                                Register
+                                {clicked && loading ? <Loader /> : "Register"}
                               </Button>
-                              {clicked && !error && (
-                                <>
-                                  <p style={{ color: "green" }}>
-                                    Registered Successfully
-                                  </p>
-                                  {redirect && <Redirect to="/login" />}
-                                </>
+                              {clicked && !error && redirect && (
+                                <Redirect to="/login" />
                               )}
                               <div
                                 className="error"
