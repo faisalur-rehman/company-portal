@@ -8,6 +8,7 @@ import { postData } from "../Api/ApiRequest"
 // import images
 import profile from "../../assets/images/profile-img.png"
 import Loader from "pages/Loader/Loader"
+import historyPush from "pages/HistoryPush/HistoryPush"
 
 const Login = () => {
   const [error, setError] = useState(null)
@@ -132,12 +133,13 @@ const Login = () => {
                               </button>
                             </div>
                             <p style={{ color: "red" }}>{error}</p>
-                            {redirect && loginType === "company" && (
-                              <Redirect to="/profile" />
-                            )}
-                            {redirect && loginType === "admin" && (
-                              <Redirect to="/welcomeAdmin" />
-                            )}
+                            {redirect &&
+                              loginType === "company" &&
+                              // <Redirect to="/profile" />
+                              historyPush("/profile")}
+                            {redirect &&
+                              loginType === "admin" &&
+                              historyPush("/welcomeAdmin")}
                             <div className="mt-4 text-center">
                               <Link to="/resetPassword" className="text-muted">
                                 <i className="mdi mdi-lock me-1" />
