@@ -17,9 +17,13 @@ const AdminWelcome = () => {
   return (
     <div className="page-content">
       <h1>Welcome to Admin Panel</h1>
-      <Button className="m-3" color="primary" onClick={() => setRedirect(true)}>
+      <button
+        className="m-3 button-color btn btn-block waves-effect waves-light"
+        color="primary"
+        onClick={() => setRedirect(true)}
+      >
         See Companies
-      </Button>
+      </button>
       {redirect && <Redirect to="adminView" />}
     </div>
   )
