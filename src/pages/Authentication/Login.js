@@ -7,12 +7,14 @@ import { Link, Redirect } from "react-router-dom"
 import { postData } from "../Api/ApiRequest"
 // import images
 import profile from "../../assets/images/profile-img.png"
+import Loader from "pages/Loader/Loader"
 
 const Login = () => {
   const [error, setError] = useState(null)
   const [clicked, setClicked] = useState(false)
   const [loginType, setType] = useState("")
   const [redirect, setRedirect] = useState(false)
+  const [loading, setLoading] = useState(true)
   if (localStorage.getItem("token")) {
     localStorage.removeItem("token")
   }
@@ -21,10 +23,17 @@ const Login = () => {
   }
 
   const handleSubmit = async data => {
+    setClicked(true)
+    let resData
+    if (!resData) {
+      setLoading(true)
+    }
+    console.log("resData", resData)
     try {
-      const resData = await postData("/auth/login", data)
+      resData = await postData("/auth/login", data)
       setError(null)
-      console.log(resData.data.user)
+      console.log("resData", resData)
+      setLoading(false)
       // localStorage.setItem("id", resData.data.user._id)
       setType(resData.data.user.type)
       setRedirect(true)
@@ -34,8 +43,8 @@ const Login = () => {
     } catch (err) {
       setError(err.response.data.name)
       console.log(err.response)
+      setLoading(false)
     }
-    setClicked(true)
   }
   function validate(values) {
     const errors = {}
@@ -118,7 +127,7 @@ const Login = () => {
                                 className="btn btn-primary btn-block waves-effect waves-light"
                                 type="submit"
                               >
-                                Log In
+                                {clicked && loading ? <Loader /> : "Log In"}
                               </button>
                             </div>
                             <p style={{ color: "red" }}>{error}</p>
