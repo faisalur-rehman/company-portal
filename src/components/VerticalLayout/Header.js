@@ -93,7 +93,7 @@ class Header extends Component {
             <div className="d-flex">
               <div
                 className="navbar-brand-box"
-                style={{ backgroundColor: "#f85b26" }}
+                style={{ backgroundColor: "#f78606" }}
               >
                 <Link to="/" className="logo logo-dark">
                   <span className="logo-sm">

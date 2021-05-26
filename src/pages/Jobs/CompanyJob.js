@@ -63,9 +63,12 @@ const CompanyJob = props => {
               <div>
                 <h3 className="title">{first.jobTitle}</h3>
                 <p className="city">{first.location}</p>
-                <Button style={{ marginLeft: 8 }} color="primary">
+                <button
+                  style={{ marginLeft: 8 }}
+                  className="button-color btn btn-block waves-effect waves-light"
+                >
                   Apply for this Job
-                </Button>
+                </button>
                 {!clicked ? (
                   <i
                     className="far fa-heart heart"

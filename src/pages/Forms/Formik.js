@@ -17,11 +17,11 @@ const FormikComponent = props => {
               <Col>
                 {/* <Col  md={8} lg={6} xl={5}> */}
                 <Card className="overflow-hidden">
-                  <div className="bg-primary bg-soft">
+                  <div className="card-bg">
                     <Row>
                       <Col xs={7}>
-                        <div className="text-primary p-4">
-                          <h5 className="text-primary">{props.title}!</h5>
+                        <div className="p-4">
+                          <h5 className="text">{props.title}!</h5>
                         </div>
                       </Col>
                       <Col className="col-5 align-self-end">

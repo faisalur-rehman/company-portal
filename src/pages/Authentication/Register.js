@@ -80,14 +80,12 @@ const Register = () => {
           <Row className="justify-content-center">
             <Col md={8} lg={6} xl={5}>
               <Card className="overflow-hidden">
-                <div className="bg-primary bg-soft">
+                <div className="card-bg">
                   <Row>
                     <Col className="col-8">
-                      <div className="text-primary p-4">
-                        <h5 className="text-primary">
-                          Welcome to Company Portal
-                        </h5>
-                        <p>We are excited to have you on board.</p>
+                      <div className="text p-4">
+                        <h5 className="text">Welcome to Company Portal</h5>
+                        <p className="">We are excited to have you on board.</p>
                       </div>
                     </Col>
                     <Col className="col-4 align-self-end">
@@ -151,13 +149,12 @@ const Register = () => {
                             </div>
 
                             <div className="mt-4">
-                              <Button
-                                className="w-100"
+                              <button
+                                className="w-100 button-color btn btn-block waves-effect waves-light"
                                 type="submit"
-                                color="primary"
                               >
                                 {clicked && loading ? <Loader /> : "Register"}
-                              </Button>
+                              </button>
                               {clicked && !error && redirect && (
                                 <Redirect to="/login" />
                               )}

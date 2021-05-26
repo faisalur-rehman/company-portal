@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Row, Col, CardBody, Card, Container } from "reactstrap"
 import { Form, ErrorMessage, Field, Formik } from "formik"
-
+import "./Style.css"
 import { Link, Redirect } from "react-router-dom"
 
 import { postData } from "../Api/ApiRequest"
@@ -77,11 +77,11 @@ const Login = () => {
                 <Row className="justify-content-center">
                   <Col md={8} lg={7} xl={5}>
                     <Card className="overflow-hidden">
-                      <div className="bg-primary bg-soft">
+                      <div className="card-bg">
                         <Row>
                           <Col xs={8}>
-                            <div className="text-primary p-4">
-                              <h5 className="text-primary">Welcome Back !</h5>
+                            <div className="p-4">
+                              <h5 className="text">Welcome Back !</h5>
                               <p>Sign in to continue to Company Portal.</p>
                             </div>
                           </Col>
@@ -122,10 +122,11 @@ const Login = () => {
                               />
                             </div>
 
-                            <div className="mt-3 d-grid">
+                            <div className="mt-3 d-grid button-color">
                               <button
-                                className="btn btn-primary btn-block waves-effect waves-light"
+                                className="btn btn-block waves-effect waves-light"
                                 type="submit"
+                                style={{ color: "white" }}
                               >
                                 {clicked && loading ? <Loader /> : "Log In"}
                               </button>

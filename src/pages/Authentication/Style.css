@@ -1,0 +1,13 @@
+.button-color {
+  background-color: #f78606 !important;
+  color: white !important;
+  outline: none;
+  border: none !important;
+}
+.card-bg {
+  background-color: #ffb020;
+  color: white !important;
+}
+.text {
+  color: white;
+}

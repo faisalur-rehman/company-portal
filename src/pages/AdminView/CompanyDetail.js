@@ -32,7 +32,7 @@ const CompanyDetail = props => {
   const [address, setAddress] = useState("")
   const [country, setCountry] = useState("")
   // this.state = { email: "", name: "", idx: 1, contact: "", address: "" }
-  console.log(props.location.state.id)
+  // console.log(props.location.state.id)
   useEffect(() => {
     async function fetchData() {
       try {

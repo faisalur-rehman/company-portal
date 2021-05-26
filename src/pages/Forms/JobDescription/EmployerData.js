@@ -117,19 +117,6 @@ const EmployerData = () => {
             handleSubmit={handleSubmit}
             title="Employer's Description"
           >
-            {/* <label className="mt-3">Company Name for this Job</label>
-            <Field
-              name="name"
-              className="form-control"
-              placeholder="Enter company name"
-              disabled
-            />
-            <ErrorMessage
-              name="name"
-              component="div"
-              style={{ color: "red" }}
-            />
-            <br /> */}
             <label className="mt-3">Country</label>
             <Field
               name="country"
@@ -240,9 +227,12 @@ const EmployerData = () => {
               style={{ color: "red" }}
             />
             <div>
-              <Button type="submit" className="mt-4" color="primary">
+              <button
+                type="submit"
+                className="mt-4 button-color btn btn-block waves-effect waves-light"
+              >
                 Submit
-              </Button>
+              </button>
             </div>
             <br />
             {/* {clicked && !error && (

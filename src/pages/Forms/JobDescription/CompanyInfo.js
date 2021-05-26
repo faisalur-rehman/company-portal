@@ -54,11 +54,11 @@ const CompanyInfo = props => {
           <Col sm={8}>
             {/* <Col  md={8} lg={6} xl={5}> */}
             <Card className="overflow-hidden">
-              <div className="bg-primary bg-soft">
+              <div className="card-bg">
                 <Row>
                   <Col xs={7}>
-                    <div className="text-primary p-4">
-                      <h5 className="text-primary">Company Info!</h5>
+                    <div className=" p-4">
+                      <h5 className="text">Company Info!</h5>
                     </div>
                   </Col>
                   <Col className="col-5 align-self-end"></Col>
@@ -137,13 +137,12 @@ const CompanyInfo = props => {
                         />
                         <br />
                         <div>
-                          <Button
+                          <button
                             type="submit"
-                            className="mt-4"
-                            color="primary"
+                            className="mt-4 button-color btn btn-block waves-effect waves-light"
                           >
                             Submit
-                          </Button>
+                          </button>
                         </div>
                         <br />
                         {/* {clicked && !error && (

@@ -81,7 +81,7 @@ const UserProfile = props => {
     <React.Fragment>
       <div className="page-content">
         <Container fluid>
-          <Breadcrumb title="" breadcrumbItem="Profile" />
+          {/* <Breadcrumb title="" breadcrumbItem="Profile" /> */}
 
           <Row>
             <Col lg="12">
@@ -133,13 +133,14 @@ const UserProfile = props => {
                   />
                 </div>
                 <div className="mt-4">
-                  <Button
+                  <button
                     type="submit"
                     color="primary"
+                    className="button-color btn btn-block waves-effect waves-light"
                     // onClick={() => setRedirect(true)}
                   >
                     Submit
-                  </Button>
+                  </button>
                 </div>
                 {redirect && <Redirect to="postJob" />}
               </AvForm>

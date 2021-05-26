@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 import {} from "../../store/actions"
+// import "./Style.css"
 
 //i18n
 import { withTranslation } from "react-i18next"
@@ -17,7 +18,7 @@ class Sidebar extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="vertical-menu" style={{ backgroundColor: "#f85b26" }}>
+        <div className="vertical-menu" style={{ backgroundColor: "#ffb020" }}>
           <div data-simplebar className="h-100">
             {this.props.type !== "condensed" ? (
               <SidebarContent />
