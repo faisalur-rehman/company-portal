@@ -25,6 +25,7 @@ import Breadcrumb from "../../components/Common/Breadcrumb"
 import avatar from "../../assets/images/users/avatar-1.jpg"
 // actions
 import { editProfile, resetProfileFlag } from "../../store/actions"
+import historyPush from "pages/HistoryPush/HistoryPush"
 
 const UserProfile = props => {
   const [redirect, setRedirect] = useState(false)
@@ -142,7 +143,7 @@ const UserProfile = props => {
                     Submit
                   </button>
                 </div>
-                {redirect && <Redirect to="postJob" />}
+                {redirect && historyPush("/postJob")}
               </AvForm>
             </CardBody>
           </Card>

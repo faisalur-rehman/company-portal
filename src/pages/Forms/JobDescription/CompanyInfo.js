@@ -4,6 +4,7 @@ import { Row, Col, CardBody, Card, Container, Button } from "reactstrap"
 import { formGetData, formPostData, patchData } from "../../Api/ApiRequest"
 import { Link, Redirect } from "react-router-dom"
 import FormikComponent from "pages/Forms/Formik"
+import historyPush from "pages/HistoryPush/HistoryPush"
 
 const initialValues = {
   companySize: "select",
@@ -153,14 +154,8 @@ const CompanyInfo = props => {
                             See job posting here
                           </Button>
                         )} */}
-                        {redirect && (
-                          <Redirect
-                            to={{
-                              pathname: "/jobDetails",
-                              state: { id: props.location.state.id },
-                            }}
-                          />
-                        )}
+                        {redirect &&
+                          historyPush("/jobDetails", props.location.state.id)}
                       </Form>
                     )}
                   </Formik>

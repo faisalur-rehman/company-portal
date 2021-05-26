@@ -5,6 +5,7 @@ import { formGetData, formPostData, patchData } from "../../Api/ApiRequest"
 import { Link, Redirect } from "react-router-dom"
 import FormikComponent from "pages/Forms/Formik"
 import "./Style.css"
+import historyPush from "pages/HistoryPush/HistoryPush"
 
 // import profile from "../../../assets/images/profile-img.png"
 // import Step1 from "pages/Trackbar/Step1"
@@ -242,14 +243,7 @@ const EmployerData = () => {
                 </Button>
               </div>
             )} */}
-            {redirect && id && (
-              <Redirect
-                to={{
-                  pathname: "/companyInfo",
-                  state: { id },
-                }}
-              />
-            )}
+            {redirect && id && historyPush("/companyInfo", id)}
           </FormikComponent>
         </Col>
         {/* <Col sm={2}></Col> */}

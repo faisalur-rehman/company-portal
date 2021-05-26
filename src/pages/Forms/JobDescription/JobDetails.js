@@ -4,6 +4,7 @@ import { Row, Col, CardBody, Card, Container, Button } from "reactstrap"
 import { formGetData, formPostData, patchData } from "../../Api/ApiRequest"
 import { Link, Redirect } from "react-router-dom"
 import FormikComponent from "pages/Forms/Formik"
+import historyPush from "pages/HistoryPush/HistoryPush"
 
 // import profile from "../../../assets/images/profile-img.png"
 // import Step1 from "pages/Trackbar/Step1"
@@ -35,7 +36,7 @@ const JobDetails = props => {
   const [id, setId] = useState("")
   const [clicked, setClicked] = useState(false)
   const [redirect, setRedirect] = useState(false)
-  console.log(props.location.state.id)
+  console.log("id", props.location.state.id)
   useEffect(() => {
     async function fetchData() {
       try {
@@ -641,14 +642,8 @@ const JobDetails = props => {
                             See job posting here
                           </button>
                         )}
-                        {redirect && (
-                          <Redirect
-                            to={{
-                              pathname: "/companyJob",
-                              state: { id: props.location.state.id },
-                            }}
-                          />
-                        )}
+                        {redirect &&
+                          historyPush("/companyJob", props.location.state.id)}
                       </Form>
                     )}
                   </Formik>

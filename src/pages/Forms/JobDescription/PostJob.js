@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { Button } from "reactstrap"
 import "./postJob.css"
 import { Redirect } from "react-router-dom"
+import historyPush from "pages/HistoryPush/HistoryPush"
 
 const PostJob = () => {
   const [redirect, setRedirect] = useState(false)
@@ -15,7 +16,7 @@ const PostJob = () => {
       >
         Post a job
       </button>
-      {redirect && <Redirect to="employerData" />}
+      {redirect && historyPush("/employerData")}
     </div>
   )
 }

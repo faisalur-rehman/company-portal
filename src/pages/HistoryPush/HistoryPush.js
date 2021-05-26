@@ -1,7 +1,9 @@
 import { useHistory } from "react-router-dom"
 
-const historyPush = url => {
+const historyPush = (url, data) => {
+  console.log(data)
   const history = useHistory()
-  return history.push(`${url}`)
+  if (data) return history.push({ pathname: `${url}`, state: { id: data } })
+  else return history.push(`${url}`)
 }
 export default historyPush

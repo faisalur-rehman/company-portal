@@ -20,6 +20,7 @@ import logo from "../../assets/images/logo-dark.png"
 
 //ApiCalls
 import { postData } from "../Api/ApiRequest"
+import historyPush from "pages/HistoryPush/HistoryPush"
 
 const Register = () => {
   const [error, setError] = useState(null)
@@ -155,9 +156,10 @@ const Register = () => {
                               >
                                 {clicked && loading ? <Loader /> : "Register"}
                               </button>
-                              {clicked && !error && redirect && (
-                                <Redirect to="/login" />
-                              )}
+                              {clicked &&
+                                !error &&
+                                redirect &&
+                                historyPush("/login")}
                               <div
                                 className="error"
                                 style={{
