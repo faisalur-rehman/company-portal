@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Button } from "reactstrap"
-import { Redirect } from "react-router-dom"
+import { Link } from "react-router-dom"
+import historyPush from "pages/HistoryPush/HistoryPush"
 
 const AdminWelcome = () => {
   const [state, setState] = useState("")
@@ -24,7 +25,7 @@ const AdminWelcome = () => {
       >
         See Companies
       </button>
-      {redirect && <Redirect to="adminView" />}
+      {redirect && historyPush("/adminView")}
     </div>
   )
 }

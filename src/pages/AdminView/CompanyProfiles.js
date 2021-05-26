@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import "./AdminView.css"
 import { formGetData, formPostData, patchData } from "../Api/ApiRequest"
 import { Redirect } from "react-router"
+import historyPush from "pages/HistoryPush/HistoryPush"
 
 function AdminView() {
   const [companyView, setCompanies] = useState([])
@@ -35,34 +36,6 @@ function AdminView() {
     setId(companyView[index]._id)
     setRedirect(true)
   }
-  // let companyView = [
-  //   {
-  //     name: "company1",
-  //     email: "company@gmail.com",
-  //     status: "Pending",
-  //   },
-  //   {
-  //     name: "company2",
-  //     email: "company2@gmail.com",
-  //     status: "Approved",
-  //   },
-  //   {
-  //     name: "company3",
-  //     email: "company3@gmail.com",
-  //     status: "Declined",
-  //   },
-  //   {
-  //     name: "company4",
-  //     email: "company4@gmail.com",
-  //     status: "Pending",
-  //   },
-  //   {
-  //     name: "company5",
-  //     email: "company5@gmail.com",
-  //     status: "Approved",
-  //   },
-  // ]
-
   return (
     <div className="page-content companies">
       <h3>Companies Listing:</h3>
@@ -84,14 +57,7 @@ function AdminView() {
           ))}
         </tbody>
       </table>
-      {redirect && (
-        <Redirect
-          to={{
-            pathname: "/companyDetail",
-            state: { id },
-          }}
-        />
-      )}
+      {redirect && historyPush("/companyDetail", id)}
     </div>
   )
 }
