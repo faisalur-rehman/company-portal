@@ -77,11 +77,11 @@ class ProfileMenu extends Component {
               <i className="bx bx-wallet font-size-16 align-middle me-1" />
               {this.props.t("Orders")}
             </DropdownItem>
-            <DropdownItem tag="a" href="#">
+            <Link to="/setting" className="dropdown-item">
               <span className="badge badge-success float-end mt-1">5</span>
               <i className="bx bx-wrench font-size-17 align-middle me-1" />
               {this.props.t("Settings")}
-            </DropdownItem>
+            </Link>
             <DropdownItem tag="a" href="#s">
               {/* <i className="bx bx-lock-open font-size-16 align-middle me-1" /> */}
               <i

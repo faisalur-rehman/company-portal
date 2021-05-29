@@ -31,18 +31,18 @@ const EmployerData = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await formGetData(
-          `/company-post/first-form/${localStorage.getItem("id")}`,
-          localStorage.getItem("token")
-        )
         const { data } = await formGetData(
           `/company/me`,
           localStorage.getItem("token")
         )
-        console.log(data)
         if (data.profile) {
           initialValues.country = data.profile.country
         }
+        console.log(data)
+        const response = await formGetData(
+          `/company-post/first-form/${localStorage.getItem("id")}`,
+          localStorage.getItem("token")
+        )
         console.log("first form response", response.data.post)
         if (response.data.post) {
           console.log("here")
@@ -98,6 +98,7 @@ const EmployerData = () => {
     return errors
   }
   async function handleSubmit(data) {
+    let resData
     let isRemote = false
     if (data.isRemoteJob === "yes") {
       data.isRemoteJob = true
@@ -105,13 +106,24 @@ const EmployerData = () => {
     if (data.isRemoteJob === "no") {
       data.isRemoteJob = false
     }
-    console.log(data)
+    // console.log(data)
     try {
-      const resData = await formPostData(
-        "/company-post/first-form",
-        data,
-        localStorage.getItem("token")
-      )
+      if (value) {
+        console.log("patch")
+
+        resData = await patchData(
+          `/company-post/first-form/${localStorage.getItem("id")}`,
+          data,
+          localStorage.getItem("token")
+        )
+      } else {
+        console.log("post")
+        resData = await formPostData(
+          "/company-post/first-form",
+          data,
+          localStorage.getItem("token")
+        )
+      }
       setError(null)
       console.log(resData)
       setId(resData.data.post._id)

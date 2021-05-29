@@ -1,0 +1,15 @@
+.listing {
+  padding: 10px;
+  border-radius: 10px;
+  width: fit-content;
+  margin-bottom: 8px;
+  list-style: none;
+}
+
+.listing button {
+  outline: none;
+  background-color: orange;
+  border: none;
+  padding: 5px;
+  color: white;
+}

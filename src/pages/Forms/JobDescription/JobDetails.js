@@ -61,11 +61,25 @@ const JobDetails = props => {
           if (data.post.deadlineDate) {
             initialValues.deadlineDate = data.post.deadlineDate
           }
-          initialValues.empType = data.post.empType
+          if (data.post.empType.length > 1) {
+            initialValues.empType = data.post.empType
+          } else {
+            initialValues.empType = "select"
+          }
           if (data.post.plannedDate) {
             initialValues.plannedDate = data.post.plannedDate
           }
-          initialValues.salaryCompensation = data.post.salaryCompensation
+          if (data.post.salaryCompensation.length > 1) {
+            initialValues.salaryCompensation = data.post.salaryCompensation
+          } else {
+            initialValues.salaryCompensation = "select"
+          }
+          if (data.post.compensationType.length > 1) {
+            initialValues.compensationType = data.post.compensationType
+          } else {
+            initialValues.compensationType = "select"
+          }
+          // initialValues.salaryCompensation = data.post.salaryCompensation
           if (data.post.salaryRangeTo) {
             initialValues.salaryRangeTo = data.post.salaryRangeTo
           }

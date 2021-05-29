@@ -34,6 +34,7 @@ import PostJob from "pages/Forms/JobDescription/PostJob"
 import CompanyDetail from "pages/AdminView/CompanyDetail"
 import LandingPage from "pages/LandingPage/LandingPage"
 import Loader from "pages/Loader/Loader"
+import Setting from "pages/Setting/Setting"
 
 const authProtectedRoutes = [
   { path: "/dashboard", component: Dashboard },
@@ -63,6 +64,7 @@ const authProtectedRoutes = [
   { path: "/postJob", component: PostJob },
   { path: "/companyDetail", component: CompanyDetail },
   { path: "/loader", component: Loader },
+  { path: "/setting", component: Setting },
 
   // this route should be at the end of all other routes
 
