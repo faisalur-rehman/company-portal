@@ -1,9 +1,10 @@
-import React from "react"
+import React, { useState } from "react"
 import "./LandingPage.css"
-import { useHistory } from "react-router-dom"
+import historyPush from "pages/HistoryPush/HistoryPush"
+import { Redirect } from "react-router"
 
 const LandingPage = () => {
-  const history = useHistory()
+  const [redirect, setRedirect] = useState(false)
   return (
     <div>
       <header className="hero-section">
@@ -11,8 +12,9 @@ const LandingPage = () => {
           <div className="hero-inner">
             <div className="hero-inner-text">
               <h1 className="hero-inner-title">
-                Let's <span className="text-focus">make</span> your next great{" "}
-                <span className="text-focus">hire.</span> <em>Fast.</em>
+                Looking for <span className="text-focus">Employee?</span>
+                <br /> <span className="text-focus">You </span>
+                are at the right place.
               </h1>
               <div className="hero-inner-subtitle">
                 <p>You know who you're looking for.</p>
@@ -23,16 +25,16 @@ const LandingPage = () => {
               <button
                 className=""
                 type="button"
-                onClick={() => history.push("/login")}
+                onClick={() => setRedirect(true)}
               >
-                Post a job
+                Find a new employee
               </button>
             </div>
           </div>
           <div className="hero-cards">
             <div className="hero-card">
               <div className="hero-card-header">
-                <i className="far fa-edit"></i>
+                <h3>1</h3>
               </div>
               <div className="hero-card-body">
                 <h4>Create your free account</h4>
@@ -44,32 +46,34 @@ const LandingPage = () => {
             </div>
             <div className="hero-card">
               <div className="hero-card-header">
-                <i className="far fa-clipboard"></i>
+                <h3>2</h3>
               </div>
               <div className="hero-card-body">
-                <h4> Build your job post</h4>
+                <h4> Post your job</h4>
                 <p>
-                  Then just add a title, description, and location to your job
-                  post, and you're ready to go.
+                  Then just fill your job requirements, and you're ready to go.
+                  one of our specialist will get in touch with you a few moments
+                  later
                 </p>
               </div>
             </div>
             <div className="hero-card">
               <div className="hero-card-header">
-                <i class="fal fa-money-check-edit"></i>
+                <h3>3</h3>
               </div>
 
               <div className="hero-card-body">
-                <h4>Post your job</h4>
+                <h4>Rate our service</h4>
                 <p>
-                  After you post your job use our state of the art tools to help
-                  you find dream talent.
+                  After you find the desired talent, let’s us know how you find
+                  our service and what you would like for the future.
                 </p>
               </div>
             </div>
           </div>
         </div>
       </header>
+
       <section className="features-section-main">
         <div className="hero-container">
           <div className="features-section-title">
@@ -87,21 +91,18 @@ const LandingPage = () => {
                   <i className="fas fa-eye"></i>
                 </div>
                 <div className="features-section-card-text">
-                  <h4>Get more visibility</h4>
-                  <p>
-                    Sponsor your job to ensure it gets seen by the right people.
-                  </p>
+                  <h4>Save time, save money</h4>
+                  <p>Pay only when you find desired employee.</p>
                 </div>
               </div>
               <div className="features-section-card">
                 <div className="features-section-card-icon">
-                  <i className="fal fa-award"></i>
+                  <i className="far fa-award"></i>
                 </div>
                 <div className="features-section-card-text">
-                  <h4>Find quality applicants</h4>
+                  <h4>Find qualified candidates</h4>
                   <p>
-                    List your required skills for the job so relevant candidates
-                    apply.
+                    we provide criminal records checks and background check.
                   </p>
                 </div>
               </div>
@@ -109,13 +110,11 @@ const LandingPage = () => {
             <div className="features-section-row">
               <div className="features-section-card">
                 <div className="features-section-card-icon">
-                  <i className="fal fa-badge-check"></i>
+                  <i className="fas fa-badge-check"></i>
                 </div>
                 <div className="features-section-card-text">
-                  <h4>Get more visibility</h4>
-                  <p>
-                    Sponsor your job to ensure it gets seen by the right people.
-                  </p>
+                  <h4>Dedicated service</h4>
+                  <p> you will get assisted in all steps.</p>
                 </div>
               </div>
               <div className="features-section-card">
@@ -123,10 +122,10 @@ const LandingPage = () => {
                   <i className="fas fa-edit"></i>
                 </div>
                 <div className="features-section-card-text">
-                  <h4>Organize your candidates</h4>
+                  <h4>You are part of something very big</h4>
                   <p>
-                    View and sort resumes, send messages, and schedule
-                    interviews—all on Indeed.
+                    by using our service, you provide job to one of million
+                    woman in the world
                   </p>
                 </div>
               </div>
@@ -146,6 +145,7 @@ const LandingPage = () => {
           </div>
         </div>
       </section>
+      {redirect && historyPush("/login")}
     </div>
   )
 }
