@@ -31,6 +31,10 @@ const EmployerData = () => {
   useEffect(() => {
     async function fetchData() {
       try {
+        const response = await formGetData(
+          `/company-post/first-form/${localStorage.getItem("id")}`,
+          localStorage.getItem("token")
+        )
         const { data } = await formGetData(
           `/company/me`,
           localStorage.getItem("token")
@@ -38,12 +42,30 @@ const EmployerData = () => {
         console.log(data)
         if (data.profile) {
           initialValues.country = data.profile.country
+        }
+        console.log("first form response", response.data.post)
+        if (response.data.post) {
+          console.log("here")
+          initialValues.country = response.data.post.country
+          initialValues.hiringRole = response.data.post.hiringRole
+          initialValues.jobPostingLanguage =
+            response.data.post.jobPostingLanguage
+          initialValues.jobTitle = response.data.post.jobTitle
+          initialValues.location = response.data.post.location
+          initialValues.noOfHires = response.data.post.noOfHires
+          if (response.data.post.isRemoteJob) {
+            initialValues.isRemoteJob = "yes"
+            setValues(initialValues)
+          } else {
+            initialValues.isRemoteJob = "no"
+            setValues(initialValues)
+          }
           setValues(initialValues)
         }
         setError(null)
       } catch (err) {
         // setError(err.response)
-        console.log(err)
+        console.log(err.response)
       }
     }
     fetchData()
@@ -93,6 +115,7 @@ const EmployerData = () => {
       setError(null)
       console.log(resData)
       setId(resData.data.post._id)
+      localStorage.setItem("id", resData.data.post._id)
     } catch (err) {
       // setError(err.response.data.name)
       console.log(err.response)

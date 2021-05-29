@@ -29,7 +29,7 @@ import historyPush from "pages/HistoryPush/HistoryPush"
 
 const UserProfile = props => {
   const [redirect, setRedirect] = useState(false)
-  const [contactNo, setContact] = useState("")
+  // const [contactNo, setContact] = useState("")
   const [address, setAddress] = useState("")
   const [country, setCountry] = useState("")
   // this.state = { email: "", name: "", idx: 1, contact: "", address: "" }
@@ -48,7 +48,7 @@ const UserProfile = props => {
           localStorage.getItem("token")
         )
         if (data.profile) {
-          setContact(data.profile.contactNo)
+          // setContact(data.profile.contactNo)
           setAddress(data.profile.address)
           setCountry(data.profile.country)
         }
@@ -113,7 +113,7 @@ const UserProfile = props => {
                     required
                   />
                   <br />
-                  <AvField
+                  {/* <AvField
                     name="contactNo"
                     label="Contact Number"
                     value={contactNo}
@@ -122,7 +122,7 @@ const UserProfile = props => {
                     type="number"
                     required
                   />
-                  <br />
+                  <br /> */}
                   <AvField
                     name="country"
                     label="Country"

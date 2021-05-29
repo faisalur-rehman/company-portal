@@ -19,15 +19,17 @@ let initialValues = {
   salaryRangeFrom: 0,
   salaryRangeTo: 0,
   compensationType: "select",
-  receiveApplication: "select",
+  receiveApplication: "email",
   streetAddress: "",
   canSubmitResume: "",
   isApplicationDeadline: "",
   deadlineDate: "",
   jobDescription: "",
-  startingAt: 0,
-  exact: 0,
-  upto: 0,
+  experience: "",
+  candidateBackground: "select",
+  // startingAt: 0,
+  // exact: 0,
+  // upto: 0,
 }
 
 const JobDetails = props => {
@@ -36,21 +38,49 @@ const JobDetails = props => {
   const [id, setId] = useState("")
   const [clicked, setClicked] = useState(false)
   const [redirect, setRedirect] = useState(false)
-  console.log("id", props.location.state.id)
+  const [previous, setPrevious] = useState(false)
+  // console.log("id", props.location.state.id)
+
   useEffect(() => {
     async function fetchData() {
       try {
         const { data } = await formGetData(
-          `/company-post/third-form/${props.location.state.id}`,
+          `/company-post/third-form/${localStorage.getItem("id")}`,
           localStorage.getItem("token")
         )
-        // console.log(data.post)
+        console.log("dat", data)
         if (data.post) {
           initialValues.jobDescription = data.post.jobDescription
-          // initialValues.jobTitle = data.tourGuide.jobTitle
-          initialValues = { ...data.post }
-          setValues({ ...data.post })
-          if (value) initialValues = { ...value }
+          initialValues.canSubmitResume = data.post.canSubmitResume
+          initialValues.compensationType = data.post.compensationType
+          initialValues.contractDuration = data.post.contractDuration
+          if (data.post.contractDuration) {
+            initialValues.contractDuration = data.post.contractDuration
+          }
+          initialValues.contractType = data.post.contractType
+          if (data.post.deadlineDate) {
+            initialValues.deadlineDate = data.post.deadlineDate
+          }
+          initialValues.empType = data.post.empType
+          if (data.post.plannedDate) {
+            initialValues.plannedDate = data.post.plannedDate
+          }
+          initialValues.salaryCompensation = data.post.salaryCompensation
+          if (data.post.salaryRangeTo) {
+            initialValues.salaryRangeTo = data.post.salaryRangeTo
+          }
+          initialValues.salaryRangeFrom = data.post.salaryRangeFrom
+          if (data.post.isApplicationDeadline) {
+            initialValues.isApplicationDeadline = "yes"
+          } else {
+            initialValues.isApplicationDeadline = "no"
+          }
+          if (data.post.isPlannedStartDate) {
+            initialValues.isPlannedStartDate = "yes"
+          } else {
+            initialValues.isPlannedStartDate = "no"
+          }
+          setValues(initialValues)
         }
         setError(null)
       } catch (err) {
@@ -60,7 +90,7 @@ const JobDetails = props => {
     }
     fetchData()
   }, [])
-  console.log(value)
+  // console.log("initial", initialValues)
 
   function validate(values) {
     const errors = {}
@@ -73,9 +103,6 @@ const JobDetails = props => {
     }
     if (values.compensationType === "select") {
       errors.compensationType = "Required"
-    }
-    if (values.receiveApplication === "select") {
-      errors.receiveApplication = "Required"
     }
 
     if (values.salaryCompensation === "select") {
@@ -92,9 +119,9 @@ const JobDetails = props => {
     if (!values.isPlannedStartDate) {
       errors.isPlannedStartDate = "Required"
     }
-    if (values.receiveApplication === "inPerson" && !values.streetAddress) {
-      errors.streetAddress = "Required"
-    }
+    // if (values.receiveApplication === "inPerson" && !values.streetAddress) {
+    //   errors.streetAddress = "Required"
+    // }
     if (!values.isApplicationDeadline) {
       errors.isApplicationDeadline = "Required"
     }
@@ -116,8 +143,9 @@ const JobDetails = props => {
     if (!values.isApplicationDeadline) {
       errors.isApplicationDeadline = "Required"
     }
-    if (!values.jobDescription) {
-      errors.jobDescription = "Required"
+    let words = values.jobDescription.split(" ")
+    if (words.length < 95) {
+      errors.jobDescription = "At least 95 words are required"
     }
 
     return errors
@@ -146,12 +174,12 @@ const JobDetails = props => {
     if (data.isApplicationDeadline === "no") {
       data.deadlineDate = ""
     }
-    if (data.receiveApplication === "mail") {
-      data.streetAddress = ""
-    }
+    // if (data.receiveApplication === "mail") {
+    //   data.streetAddress = ""
+    // }
     try {
       const resData = await patchData(
-        `/company-post/third-form/${props.location.state.id}`,
+        `/company-post/third-form/${localStorage.getItem("id")}`,
         data,
         localStorage.getItem("token")
       )
@@ -207,6 +235,40 @@ const JobDetails = props => {
                         </Field>
                         <ErrorMessage
                           name="empType"
+                          component="div"
+                          style={{ color: "red" }}
+                        />
+                        <br />
+                        <label>What should be Candidate Background?</label>
+                        <Field
+                          as="select"
+                          name="candidateBackground"
+                          className="w-100 active select"
+                        >
+                          <option defaultValue value="select" disabled>
+                            Select
+                          </option>
+                          <option value="secondary">Secondary</option>
+                          <option value="college">College</option>
+                          <option value="university">University</option>
+                          <option value="no_need">Not needed</option>
+                        </Field>
+                        <ErrorMessage
+                          name="candidateBackground"
+                          component="div"
+                          style={{ color: "red" }}
+                        />
+                        <br />
+                        <label className="mt-3">
+                          Work Experience Required:
+                        </label>
+                        <Field
+                          name="experience"
+                          className="form-control textarea"
+                          placeholder="Enter work experience"
+                        />
+                        <ErrorMessage
+                          name="experience"
                           component="div"
                           style={{ color: "red" }}
                         />
@@ -573,41 +635,6 @@ const JobDetails = props => {
                           style={{ color: "red" }}
                         />
                         <br />
-                        <label className="mt-3">
-                          How do you want to reveive applications?
-                        </label>
-                        <br />
-                        <Field
-                          as="select"
-                          name="receiveApplication"
-                          className="w-100 select"
-                        >
-                          <option defaultValue value="select" disabled>
-                            Select
-                          </option>
-                          <option value="email">Email</option>
-                          <option value="inPerson">In-Person</option>
-                        </Field>
-                        {values.receiveApplication === "inPerson" && (
-                          <>
-                            <Field
-                              placeholder="Enter street address"
-                              name="streetAddress"
-                              className="w-100 mt-3 form-control select"
-                            />
-                            <ErrorMessage
-                              name="streetAddress"
-                              component="div"
-                              style={{ color: "red" }}
-                            />
-                          </>
-                        )}
-                        <ErrorMessage
-                          name="receiveApplication"
-                          component="div"
-                          style={{ color: "red" }}
-                        />
-                        <br />
                         <label className="mt-3" htmlFor="jobDescription">
                           Job Description:
                         </label>
@@ -625,13 +652,28 @@ const JobDetails = props => {
                           style={{ color: "red" }}
                         />
 
-                        <div>
-                          <button
-                            type="submit"
-                            className="mt-4 button-color btn btn-block waves-effect waves-light"
-                          >
-                            Submit
-                          </button>
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <div>
+                            <button
+                              type="submit"
+                              className="mt-4 button-color btn btn-block waves-effect waves-light"
+                            >
+                              Submit
+                            </button>
+                          </div>
+                          <div>
+                            <button
+                              className="mt-4 button-color btn btn-block waves-effect waves-light"
+                              onClick={() => setPrevious(true)}
+                            >
+                              Previous
+                            </button>
+                          </div>
                         </div>
                         <br />
                         {clicked && !error && (
@@ -642,8 +684,8 @@ const JobDetails = props => {
                             See job posting here
                           </button>
                         )}
-                        {redirect &&
-                          historyPush("/companyJob", props.location.state.id)}
+                        {previous && historyPush("/companyInfo")}
+                        {redirect && historyPush("/companyJob")}
                       </Form>
                     )}
                   </Formik>

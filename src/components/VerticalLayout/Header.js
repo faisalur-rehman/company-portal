@@ -95,7 +95,7 @@ class Header extends Component {
                 className="navbar-brand-box"
                 style={{ backgroundColor: "#f78606" }}
               >
-                <Link to="/" className="logo logo-dark">
+                <Link to="" className="logo logo-dark">
                   <span className="logo-sm">
                     <img src={logo} alt="" height="22" />
                   </span>
@@ -104,14 +104,13 @@ class Header extends Component {
                   </span>
                 </Link>
 
-                <Link to="/" className="logo logo-light">
-                  <span className="logo-sm">
-                    <img src={logoLightSvg} alt="" height="22" />
-                  </span>
+                {/* <Link to="" className="logo logo-light"> */}
+                <div style={{ cursor: "pointer", paddingTop: 20 }}>
                   <span className="logo-lg">
                     <img src={logoLightPng} alt="" height="19" />
                   </span>
-                </Link>
+                </div>
+                {/* </Link> */}
               </div>
 
               <button

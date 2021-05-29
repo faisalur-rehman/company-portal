@@ -2,34 +2,22 @@ import React, { useState, useEffect } from "react"
 import "./JobsFeed.css"
 import { Button } from "reactstrap"
 import { formGetData, formPostData, patchData } from "../Api/ApiRequest"
+import historyPush from "pages/HistoryPush/HistoryPush"
 
 const CompanyJob = props => {
-  // let jobFeed = [
-  //   {
-  //     title: "Custom Realtime React Dashboard",
-  //     description:
-  //       "We are looking to find a senior front-end React developer who has extensive experience in building scalable, realtime web applications. You will be working closely alongside our team of 10 full-time front-end and back-end engineers.",
-  //     salary: "$1500",
-  //     address: "Lahore",
-  //     timings: "30 hours/Week",
-  //     city: "Lahore",
-  //     country: "Pakistan",
-  //     jobType: "Full Time",
-  //     isRemoteJob: "Yes",
-  //   },
-  // ]
   const [job, setJob] = useState({})
   const [first, setFirst] = useState()
   const [clicked, setClicked] = useState(false)
+  const [previous, setPrevious] = useState(false)
   useEffect(() => {
     async function fetchData() {
       try {
         const { data } = await formGetData(
-          `/company-post/third-form/${props.location.state.id}`,
+          `/company-post/third-form/${localStorage.getItem("id")}`,
           localStorage.getItem("token")
         )
         const first = await formGetData(
-          `/company-post/first-form/${props.location.state.id}`,
+          `/company-post/first-form/${localStorage.getItem("id")}`,
           localStorage.getItem("token")
         )
         console.log(first.data)
@@ -140,10 +128,10 @@ const CompanyJob = props => {
                 margin: "auto",
               }}
             >
-              <div className="app-statement">
+              {/* <div className="app-statement">
                 <h3>Send application to following Email</h3>
                 <p>{job.receiveApplication}</p>
-              </div>
+              </div> */}
               <div className="app-statement">
                 <h3>Resume Required</h3>
                 <p>{job.canSubmitResume}</p>
@@ -158,7 +146,16 @@ const CompanyJob = props => {
             </div> */}
             </div>
           </div>
+          <div>
+            <button
+              className="m-4 button-color btn btn-block waves-effect waves-light"
+              onClick={() => setPrevious(true)}
+            >
+              Previous
+            </button>
+          </div>
         </div>
+        {previous && historyPush("/jobDetails")}
         {/* <div className="col-sm-2"></div> */}
       </div>
     </div>

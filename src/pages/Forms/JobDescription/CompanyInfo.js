@@ -17,7 +17,34 @@ const CompanyInfo = props => {
   const [error, setError] = useState(null)
   const [clicked, setClicked] = useState(false)
   const [redirect, setRedirect] = useState(false)
+  const [previous, setPrevious] = useState(false)
   console.log(props.location.state)
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await formGetData(
+          `/company-post/second-form/${localStorage.getItem("id")}`,
+          localStorage.getItem("token")
+        )
+        console.log("2nd form response", response.data)
+        if (response.data.profile) {
+          initialValues.companySize = response.data.profile.companySize
+          initialValues.hearAboutUs = response.data.profile.hearAboutUs
+          initialValues.phoneNumber = response.data.profile.phoneNumber
+
+          setValues(initialValues)
+        }
+
+        setError(null)
+      } catch (err) {
+        // setError(err.response)
+        console.log(err.response)
+      }
+    }
+    fetchData()
+  }, [])
+
   function validate(values) {
     const errors = {}
     if (values.companySize === "select") {
@@ -108,15 +135,13 @@ const CompanyInfo = props => {
                           <option defaultValue value="select" disabled>
                             Select
                           </option>
-                          <option value="mouth_word">Mouth Word</option>
+                          <option value="mouth_word">Website</option>
                           <option value="tv">TV</option>
-                          <option value="onlineVideo">Online Video</option>
-                          <option value="podcast">Podcast</option>
+                          <option value="onlineVideo">Internet Search</option>
                           <option value="newspaper">Newspaper</option>
-                          <option value="search_engine">Search Engine</option>
                           <option value="mail">Mail</option>
                           <option value="radio">Radio</option>
-                          <option value="streamAudio">Stream Audio</option>
+                          <option value="streamAudio">Friend or Family</option>
                         </Field>
                         <ErrorMessage
                           name="hearAboutUs"
@@ -137,13 +162,28 @@ const CompanyInfo = props => {
                           style={{ color: "red" }}
                         />
                         <br />
-                        <div>
-                          <button
-                            type="submit"
-                            className="mt-4 button-color btn btn-block waves-effect waves-light"
-                          >
-                            Submit
-                          </button>
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          <div>
+                            <button
+                              type="submit"
+                              className="mt-4 button-color btn btn-block waves-effect waves-light"
+                            >
+                              Submit
+                            </button>
+                          </div>
+                          <div>
+                            <button
+                              className="mt-4 button-color btn btn-block waves-effect waves-light"
+                              onClick={() => setPrevious(true)}
+                            >
+                              <a href="/employerData">Previous</a>
+                            </button>
+                          </div>
                         </div>
                         <br />
                         {/* {clicked && !error && (
@@ -154,6 +194,7 @@ const CompanyInfo = props => {
                             See job posting here
                           </Button>
                         )} */}
+                        {/* {previous && <a href='/employerData'></a>} */}
                         {redirect &&
                           historyPush("/jobDetails", props.location.state.id)}
                       </Form>
