@@ -1,13 +1,13 @@
 import React, { useState } from "react"
 import "./LandingPage.css"
 import historyPush from "pages/HistoryPush/HistoryPush"
-import { Redirect } from "react-router"
+import bg from "../../assets/images/bg.jpg"
 
 const LandingPage = () => {
   const [redirect, setRedirect] = useState(false)
   return (
     <div>
-      <header className="hero-section">
+      <header className="hero-section" style={{ backgroundImage: `${bg}` }}>
         <div className="hero-container">
           <div className="hero-inner">
             <div className="hero-inner-text">
@@ -31,48 +31,47 @@ const LandingPage = () => {
               </button>
             </div>
           </div>
-          <div className="hero-cards">
-            <div className="hero-card">
-              <div className="hero-card-header">
-                <h3>1</h3>
-              </div>
-              <div className="hero-card-body">
-                <h4>Create your free account</h4>
-                <p>
-                  All you need is your email address to create an account and
-                  start building your job post.
-                </p>
-              </div>
-            </div>
-            <div className="hero-card">
-              <div className="hero-card-header">
-                <h3>2</h3>
-              </div>
-              <div className="hero-card-body">
-                <h4> Post your job</h4>
-                <p>
-                  Then just fill your job requirements, and you're ready to go.
-                  one of our specialist will get in touch with you a few moments
-                  later
-                </p>
-              </div>
-            </div>
-            <div className="hero-card">
-              <div className="hero-card-header">
-                <h3>3</h3>
-              </div>
-
-              <div className="hero-card-body">
-                <h4>Rate our service</h4>
-                <p>
-                  After you find the desired talent, let’s us know how you find
-                  our service and what you would like for the future.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </header>
+      <div className="hero-cards">
+        <div className="hero-card">
+          <div className="hero-card-header">
+            <h3>1</h3>
+          </div>
+          <div className="hero-card-body">
+            <h4>Create your free account</h4>
+            <p>
+              All you need is your email address to create an account and start
+              building your job post.
+            </p>
+          </div>
+        </div>
+        <div className="hero-card">
+          <div className="hero-card-header">
+            <h3>2</h3>
+          </div>
+          <div className="hero-card-body">
+            <h4> Post your job</h4>
+            <p>
+              Then just fill your job requirements, and you're ready to go. one
+              of our specialist will get in touch with you a few moments later
+            </p>
+          </div>
+        </div>
+        <div className="hero-card">
+          <div className="hero-card-header">
+            <h3>3</h3>
+          </div>
+
+          <div className="hero-card-body">
+            <h4>Rate our service</h4>
+            <p>
+              After you find the desired talent, let’s us know how you find our
+              service and what you would like for the future.
+            </p>
+          </div>
+        </div>
+      </div>
 
       <section className="features-section-main">
         <div className="hero-container">
@@ -97,7 +96,7 @@ const LandingPage = () => {
               </div>
               <div className="features-section-card">
                 <div className="features-section-card-icon">
-                  <i className="far fa-award"></i>
+                  <i className="fal fa-award"></i>
                 </div>
                 <div className="features-section-card-text">
                   <h4>Find qualified candidates</h4>
@@ -110,7 +109,7 @@ const LandingPage = () => {
             <div className="features-section-row">
               <div className="features-section-card">
                 <div className="features-section-card-icon">
-                  <i className="fas fa-badge-check"></i>
+                  <i className="fal fa-badge-check"></i>
                 </div>
                 <div className="features-section-card-text">
                   <h4>Dedicated service</h4>
