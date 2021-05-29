@@ -73,10 +73,10 @@ class ProfileMenu extends Component {
               <i className="bx bx-user font-size-16 align-middle ms-1" />
               {this.props.t("Profile")}
             </Link>
-            <DropdownItem tag="a" href="#">
+            <Link to="/order" className="dropdown-item">
               <i className="bx bx-wallet font-size-16 align-middle me-1" />
               {this.props.t("Orders")}
-            </DropdownItem>
+            </Link>
             <Link to="/setting" className="dropdown-item">
               <span className="badge badge-success float-end mt-1">5</span>
               <i className="bx bx-wrench font-size-17 align-middle me-1" />

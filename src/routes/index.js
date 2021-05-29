@@ -35,6 +35,7 @@ import CompanyDetail from "pages/AdminView/CompanyDetail"
 import LandingPage from "pages/LandingPage/LandingPage"
 import Loader from "pages/Loader/Loader"
 import Setting from "pages/Setting/Setting"
+import Order from "pages/Orders/Order"
 
 const authProtectedRoutes = [
   { path: "/dashboard", component: Dashboard },
@@ -65,6 +66,7 @@ const authProtectedRoutes = [
   { path: "/companyDetail", component: CompanyDetail },
   { path: "/loader", component: Loader },
   { path: "/setting", component: Setting },
+  { path: "/order", component: Order },
 
   // this route should be at the end of all other routes
 
