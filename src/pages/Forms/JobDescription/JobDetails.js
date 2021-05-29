@@ -45,7 +45,7 @@ const JobDetails = props => {
     async function fetchData() {
       try {
         const { data } = await formGetData(
-          `/company-post/third-form/${localStorage.getItem("id")}`,
+          `/company-post/third-form/${props.location.state.id}`,
           localStorage.getItem("token")
         )
         console.log("dat", data)
@@ -698,8 +698,10 @@ const JobDetails = props => {
                             See job posting here
                           </button>
                         )}
-                        {previous && historyPush("/companyInfo")}
-                        {redirect && historyPush("/companyJob")}
+                        {previous &&
+                          historyPush("/companyInfo", props.location.state.id)}
+                        {redirect &&
+                          historyPush("/companyJob", props.location.state.id)}
                       </Form>
                     )}
                   </Formik>

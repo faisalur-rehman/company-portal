@@ -24,7 +24,7 @@ const CompanyInfo = props => {
     async function fetchData() {
       try {
         const response = await formGetData(
-          `/company-post/second-form/${localStorage.getItem("id")}`,
+          `/company-post/second-form/${props.location.state.id}`,
           localStorage.getItem("token")
         )
         console.log("2nd form response", response.data)

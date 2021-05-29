@@ -10,6 +10,8 @@ class Logout extends Component {
    */
   componentDidMount = () => {
     // emit the event
+    localStorage.removeItem("id")
+    localStorage.removeItem("token")
     this.props.logoutUser(this.props.history)
   }
 

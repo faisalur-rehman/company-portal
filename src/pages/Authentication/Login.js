@@ -22,6 +22,9 @@ const Login = () => {
   // if (localStorage.getItem("type")) {
   //   localStorage.removeItem("type")
   // }
+  // if (localStorage.getItem("id")) {
+  //   localStorage.removeItem("id")
+  // }
 
   const handleSubmit = async data => {
     setClicked(true)
@@ -39,7 +42,7 @@ const Login = () => {
       setType(resData.data.user.type)
       localStorage.setItem("token", resData.data.user.token)
       localStorage.setItem("type", resData.data.user.type)
-      localStorage.setItem("id", resData.data.user._id)
+      // localStorage.setItem("id", resData.data.user._id)
       setRedirect(true)
     } catch (err) {
       setError(err.response.data.name)

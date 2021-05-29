@@ -112,7 +112,7 @@ const EmployerData = () => {
         console.log("patch")
 
         resData = await patchData(
-          `/company-post/first-form/${localStorage.getItem("id")}`,
+          `/company-post/first-form/${id}`,
           data,
           localStorage.getItem("token")
         )

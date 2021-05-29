@@ -13,11 +13,11 @@ const CompanyJob = props => {
     async function fetchData() {
       try {
         const { data } = await formGetData(
-          `/company-post/third-form/${localStorage.getItem("id")}`,
+          `/company-post/third-form/${props.location.state.id}`,
           localStorage.getItem("token")
         )
         const first = await formGetData(
-          `/company-post/first-form/${localStorage.getItem("id")}`,
+          `/company-post/first-form/${props.location.state.id}`,
           localStorage.getItem("token")
         )
         console.log(first.data)
@@ -155,7 +155,7 @@ const CompanyJob = props => {
             </button>
           </div>
         </div>
-        {previous && historyPush("/jobDetails")}
+        {previous && historyPush("/jobDetails", props.location.state.id)}
         {/* <div className="col-sm-2"></div> */}
       </div>
     </div>
