@@ -181,12 +181,12 @@ const CompanyInfo = props => {
                               className="mt-4 button-color btn btn-block waves-effect waves-light"
                               onClick={() => setPrevious(true)}
                             >
-                              <a
-                                href="/employerData"
+                              <Link
+                                to="/employerData"
                                 style={{ color: "white" }}
                               >
                                 Previous
-                              </a>
+                              </Link>
                             </button>
                           </div>
                         </div>
