@@ -70,7 +70,7 @@ const authProtectedRoutes = [
 
   // this route should be at the end of all other routes
 
-  { path: "/", exact: true, component: () => <Redirect to="/landingPage" /> },
+  { path: "/", exact: true, component: () => <Redirect to="/dashboard" /> },
 ]
 
 const publicRoutes = [

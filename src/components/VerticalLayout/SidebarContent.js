@@ -122,7 +122,7 @@ class SidebarContent extends Component {
                 {this.props.t("Menu")}
               </li>
               <li>
-                <Link to="/#" className="waves-effect">
+                <Link to="#" className="waves-effect">
                   <i className="bx bx-home-circle" />
                   <span className="badge rounded-pill bg-info float-end">
                     04
